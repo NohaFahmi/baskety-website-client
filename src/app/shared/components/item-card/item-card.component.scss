@@ -1,0 +1,83 @@
+.item-card {
+  display: flex;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 lightgrey;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  padding: 5px 20px;
+  font-size: 16px;
+  gap: 40px;
+  cursor: pointer;
+  &.in-list {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    .item-card_count-btn {
+      background-color: transparent;
+    }
+  }
+  p {
+    margin: 0;
+  }
+  .add-item-btn {
+    border: none;
+    padding: 10px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+  }
+  &_name {
+    max-width: 100px;
+    color: var(--text-color);
+  }
+  &_count {
+    color: var(--soft-accent-color);
+    font-weight: bolder;
+  }
+  &_count-btn {
+    width: fit-content;
+    border: none;
+    background-color: var(--bg-color);
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: var(--subtle-color);
+    transition: all 0.5s ease-in-out;
+    .remove-item, .decrease-count, .increase-count {
+      display: none;
+    }
+    &.extended {
+      background-color: transparent;
+      padding: 0;
+      width: 160px;
+      .remove-item, .decrease-count, .increase-count {
+        display: block;
+      }
+      .remove-item {
+        background-color: var(--subtle-color);
+        color: var(--bg-color);
+        display: block;
+        height: 100%;
+        width: fit-content;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    }
+    .item-count {
+      border: 2px solid var(--subtle-color);
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: var(--subtle-color);
+      font-weight: bolder;
+    }
+    .remove-item, .decrease-count, .increase-count, .item-count {
+      cursor: pointer;
+    }
+  }
+}

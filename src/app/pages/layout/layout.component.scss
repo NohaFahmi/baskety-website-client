@@ -2,29 +2,37 @@
   display: flex;
   gap: 50px;
   overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
   position: relative;
   background-color: var(--surface-c);
   .app-side-navigation-container {
     width: 90px;
-    height: 99vh;
+    height: 100vh;
     box-shadow: 0 0 10px 0 var(--subtle-color);
     background-color: var(--bg-color);
+    position: fixed;
     @media(max-width: 1200px) {
       width: 60px;
     }
   }
   .app-content-container {
-    border: 1px solid green;
     width: 100%;
-    height: 100%;
-    overflow-y: auto;
     padding-right: 450px;
+    padding-left: 140px;
+    padding-bottom: 30px;
     background-color: var(--surface-c);
+    height: fit-content;
+    overflow-y: auto;
+    @media(max-width: 1200px) {
+      padding-right: 0;
+      padding-left: 110px;
+    }
   }
   .app-right-view-container {
     border: 1px solid #355259;
     width: 400px;
-    position: absolute;
+    position: fixed;
     top: 0;
     transition: all 1s ease-in-out;
     bottom: 0;

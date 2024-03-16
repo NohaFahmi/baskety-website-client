@@ -1,1 +1,25 @@
-<p>item-card works!</p>
+<div class="item-card">
+<!--  in-list: to add in list-->
+  <p class="item-card_name">Avocado</p>
+  <button class="add-item-btn btn-icon">
+    <i class="pi pi-plus"></i>
+  </button>
+  <p class="item-card_count" *ngIf="false">
+    3 pcs
+  </p>
+  <button class="item-card_count-btn"  *ngIf="false">
+<!--    extended: add when click on item count-->
+    <span class="remove-item">
+      <i class="pi pi-trash"></i>
+    </span>
+    <span class="decrease-count">
+      <i class="pi pi-minus"></i>
+    </span>
+    <span class="item-count">
+      3 pcs
+    </span>
+    <span class="increase-count">
+      <i class="pi pi-plus"></i>
+    </span>
+  </button>
+</div>
