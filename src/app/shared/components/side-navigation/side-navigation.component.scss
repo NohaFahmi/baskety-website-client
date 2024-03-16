@@ -1,0 +1,77 @@
+.side-navigation {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 100px;
+  padding: 10px;
+  &_logo {
+    width: 60px;
+    height: 60px;
+    @media(max-width: 1200px) {
+      width: 50px;
+      height: 50px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &_links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    justify-content: center;
+    .link-item {
+      display: flex;
+      height: 45px;
+      ::ng-deep {
+        .p-button.p-button-link {
+          //color: var(--subtle-color);
+          &:hover {
+            color: var(--soft-accent-color);
+          }
+          &:focus {
+            box-shadow: none;
+            border: none;
+          }
+        }
+      }
+      .active-border {
+        display: inline-block;
+        width: 6px;
+        background-color: var(--soft-accent-color);
+        border-radius: 0 3px 3px 0;
+      }
+    }
+  }
+  &_list-btn {
+    ::ng-deep {
+      .p-badge {
+        transform: translate(40%, -40%);
+        background-color: var(--soft-accent-color);
+        @media(max-width: 1200px) {
+          width: 15px;
+        }
+      }
+    }
+    .list-btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+      &:hover {
+        background-color: var(--text-color);
+      }
+      @media(max-width: 1200px) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}

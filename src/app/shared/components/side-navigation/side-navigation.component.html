@@ -1,1 +1,33 @@
-<p>side-navigation works!</p>
+<div class="side-navigation">
+  <div class="side-navigation_logo">
+    <img ngSrc="assets/images/app-logo.png" width="1024" height="1024" alt="app-logo">
+  </div>
+  <div class="side-navigation_links">
+    <div class="link-item">
+<!--      <span class="active-border"></span>-->
+      <p-button icon="pi pi-list"
+                [link]="true"
+                pTooltip="home"
+                [routerLink]="'/app/home'"></p-button>
+    </div>
+    <div class="link-item">
+<!--      <span class="active-border"></span>-->
+      <p-button icon="pi pi-history"
+                [link]="true"
+                pTooltip="history"
+                [routerLink]="'/app/history'"></p-button>
+    </div>
+    <div class="link-item">
+<!--      <span class="active-border"></span>-->
+      <p-button icon="pi pi-chart-bar"
+                [link]="true"
+                pTooltip="stats"
+                [routerLink]="'/app/stats'"></p-button>
+    </div>
+  </div>
+  <div class="side-navigation_list-btn">
+    <button class="btn-icon list-btn" pBadge value="2">
+      <i class="pi pi-shopping-cart text-3xl"></i>
+    </button>
+  </div>
+</div>
