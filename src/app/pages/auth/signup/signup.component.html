@@ -28,11 +28,19 @@
           <input pInputText placeholder="Confirm Password" />
         </p-inputGroup>
 
-        <button pButton pRipple label="Submit"></button>
+        <button pButton pRipple label="Submit" class="submit-btn"></button>
       </form>
     </div>
     <div class="illustration-side">
-      <img ngSrc="assets/images/auth-illustration.jpeg" alt="auth-illustration" height="1024" width="1024"/>
+      <img ngSrc="assets/images/illustration-2.png" alt="auth-illustration" height="500" width="500"/>
+      <p class="login-text">
+        Already a member?
+        <p-button label="login here"
+                  [link]="true"
+                  [routerLink]="'/auth/login'"
+                  class="btn-link"></p-button>
+      </p>
+
     </div>
   </div>
 </div>

@@ -1,29 +1,6 @@
 @import "primeicons/primeicons.css";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-:root {
-  --primary-color: #355259; /*color of texts*/
-  --secondary-color: #e1b630;
-  --background-color: #f9f9f7;
-  --error-color: #cf554a;
-  --details-color: #97aebc;
-  --accent-color: #f0aaa7;
-  --light-blue-color: #cfe6e7; /* color for background of side nav.*/
-}
-
-
-/*
-Primary Color (Deep Sea Blue) #355259:
-Use this for the header, footer, and primary buttons to convey reliability and professionalism.
-Secondary Color (Sunny Gold) #e1b630:
-This can be used for highlighting important features, calls to action, and for drawing attention to special offers.
-Accent Color (Soft Coral) #f0aaa7:
-Perfect for interactive elements like hover states, active menu items, and for subtle accents throughout the site.
-Background Color (Cloud White) #f9f9f7:
-A clean background color that will make your content pop and ensure the site feels open and airy.
-Detail Color (Sky Blue) #97aebc:
-Use this for links, icons, and to add a touch of calm and tranquility to the overall design.
-*/
-
+@import "assets/styles/variables";
 
 *, html {
   box-sizing: border-box;
@@ -35,13 +12,13 @@ html, body {
 }
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
 }
 .app-container {
-  background-color: var(--background-color);
   height: 100%;
   min-height: 100vh;
   border: 1px solid red;
@@ -51,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid blue;
 }
 .page-title {
-  color: var(--primary-color);
+  color: var(--text-color);
 }
 
 /*!* Accent Font *!*/
