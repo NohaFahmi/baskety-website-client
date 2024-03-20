@@ -1,1 +1,9 @@
-<p>items-list-section works!</p>
+<div class="items-list-section">
+  <div class="items-category" *ngFor="let i of [1, 2, 4, 5,6 ]; index as index">
+    <h4 class="category-title">Fruit & Vegetables</h4>
+    <div class="category-items-list" [ngClass]="{'in-list': itemBtnMode === ITEM_CARD_MODES.EDIT}">
+      <app-item-card *ngFor="let i of [1, 2, 4, 5,6 ]; index as index"
+      [mode]="itemBtnMode"></app-item-card>
+    </div>
+  </div>
+</div>

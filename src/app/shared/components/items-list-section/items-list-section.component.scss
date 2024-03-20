@@ -1,0 +1,22 @@
+.items-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.items-category {
+  display: flex;
+  flex-direction: column;
+  .category-title {
+    color: var(--text-color-green);
+  }
+  .category-items-list {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    &.in-list {
+      flex-direction: column;
+    }
+  }
+}
