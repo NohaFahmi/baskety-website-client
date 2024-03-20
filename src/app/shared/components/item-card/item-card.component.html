@@ -1,25 +1,39 @@
-<div class="item-card">
-<!--  in-list: to add in list-->
-  <p class="item-card_name">Avocado</p>
-  <button class="add-item-btn btn-icon">
-    <i class="pi pi-plus"></i>
-  </button>
-  <p class="item-card_count" *ngIf="false">
-    3 pcs
-  </p>
-  <button class="item-card_count-btn"  *ngIf="false">
-<!--    extended: add when click on item count-->
-    <span class="remove-item">
-      <i class="pi pi-trash"></i>
-    </span>
-    <span class="decrease-count">
-      <i class="pi pi-minus"></i>
-    </span>
-    <span class="item-count">
-      3 pcs
-    </span>
-    <span class="increase-count">
-      <i class="pi pi-plus"></i>
-    </span>
-  </button>
+<div class="item-card" [ngClass]="{'in-list': mode === ITEM_CARD_MODES.VIEW || mode === ITEM_CARD_MODES.EDIT}">
+<!--  <p-checkbox -->
+<!--    [(ngModel)]="checked"-->
+<!--              inputId="itemCard"-->
+<!--              id="itemCard"></p-checkbox>-->
+<!-- <label for="itemCard">-->
+   <p class="item-card_name">
+     <span>Avocado</span>
+   </p>
+   <ng-container [ngSwitch]="mode">
+     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.ADD">
+       <button class="add-item-btn btn-icon">
+         <i class="pi pi-plus"></i>
+       </button>
+     </ng-template>
+     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.VIEW">
+       <p class="item-card_count">
+         3 pcs
+       </p>
+     </ng-template>
+     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.EDIT">
+       <button class="item-card_count-btn" [ngClass]="{'extended':  isCountExtended}">
+         <span class="remove-item" *ngIf="isCountExtended">
+           <i class="pi pi-trash"></i>
+         </span>
+         <span class="decrease-count" *ngIf="isCountExtended">
+          <i class="pi pi-minus"></i>
+        </span>
+        <span class="item-count" (click)="onEditItemCount()">3 pcs</span>
+        <span class="increase-count" *ngIf="isCountExtended">
+          <i class="pi pi-plus"></i>
+        </span>
+       </button>
+     </ng-template>
+   </ng-container>
+<!-- </label>-->
+
+
 </div>
