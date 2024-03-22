@@ -25,6 +25,40 @@ import {ItemsListSectionComponent} from "../../shared/components/items-list-sect
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
+  itemsList = [
+    {
+      "Fruits": [
+        {
+          "itemName": "Apples",
+          "itemCount": "10",
+          "itemPrice": "2.99",
+          "itemCompleted": true
+        },
+        {
+          "itemName": "Oranges",
+          "itemCount": "8",
+          "itemPrice": "1.99",
+          "itemCompleted": false
+        }
+      ]
+    },
+    {
+      "Vegetables": [
+        {
+          "itemName": "Carrots",
+          "itemCount": "5",
+          "itemPrice": "0.99",
+          "itemCompleted": true
+        },
+        {
+          "itemName": "Broccoli",
+          "itemCount": "2",
+          "itemPrice": "1.50",
+          "itemCompleted": false
+        }
+      ]
+    }
+  ]
 
-    protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
 }

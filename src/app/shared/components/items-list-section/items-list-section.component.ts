@@ -15,5 +15,7 @@ import {NgClass, NgForOf} from "@angular/common";
 })
 export class ItemsListSectionComponent {
   @Input() itemBtnMode?: ITEM_CARD_MODES;
+  @Input() items?: any[];
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
+  protected readonly Object = Object;
 }

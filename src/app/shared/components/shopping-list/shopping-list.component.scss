@@ -6,6 +6,16 @@
     overflow-y: scroll;
     position: relative;
   }
+  &_empty {
+    width: 100%;
+    padding: 150px 0;
+    &-message {
+      font-size: 24px;
+      text-align: center;
+      color: var(--text-color-green);
+      font-weight: bolder;
+    }
+  }
   &_add-item-card {
     display: flex;
     gap: 10px;

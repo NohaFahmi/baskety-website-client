@@ -9,20 +9,26 @@
       </div>
     </div>
   </div>
-  <div class="shopping-list_content">
-    <div class="shopping-list_content__title">
+  <ng-container *ngIf="itemsList.length > 0">
+    <div class="shopping-list_content">
+      <div class="shopping-list_content__title">
         <input type="text" pInputText placeholder="Enter a list title" disabled/>
         <button type="button" pButton
                 class="p-button-plain" icon="pi pi-pencil"></button>
+      </div>
+      <div class="shopping-list_content__items">
+        <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.EDIT" [items]="itemsList"></app-items-list-section>
+      </div>
     </div>
-    <div class="shopping-list_content__items">
-      <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.EDIT"></app-items-list-section>
-    </div>
-  </div>
-  <div class="shopping-list_footer">
+    <div class="shopping-list_footer">
       <p-button class="cancel-btn"
                 label="Cancel"
                 [link]="true"></p-button>
       <p-button class="complete-btn" label="Complete"></p-button>
+    </div>
+  </ng-container>
+  <div *ngIf="itemsList.length === 0" class="shopping-list_empty">
+    <p class="shopping-list_empty-message">No items in the list</p>
+<!--    <img ngSrc="./assets/images/shopping-list-illustration.png" alt="empty-shopping-list" width="1024" height="1024"/>-->
   </div>
 </div>
