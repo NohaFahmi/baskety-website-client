@@ -1,1 +1,37 @@
-<p>add-edit-item-form works!</p>
+<div class="add-edit-item_container">
+  <h3 class="add-edit-item_title">{{isEdit ? 'Edit item' : 'Add a new item'}}</h3>
+  <form class="add-edit-item_form">
+    <div class="input-group">
+      <label for="item-name">Name</label>
+      <input pInputText id="item-name" />
+    </div>
+    <div class="input-group">
+      <label for="item-description">Description</label>
+      <textarea id="item-description" rows="5" cols="30"
+                pInputTextarea></textarea>
+    </div>
+    <div class="input-group">
+      <label for="item-description">Image</label>
+      <p-fileUpload mode="basic"
+                    chooseLabel="Upload item image"
+                    name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    accept="image/*"></p-fileUpload>
+<!--       maxFileSize="1000000" (onUpload)="onUpload($event)"-->
+    </div>
+    <div class="input-group">
+      <label for="item-category">Category</label>
+      <p-dropdown id="item-category"
+                  placeholder="Select a category"
+                  [editable]="true" optionLabel="name"></p-dropdown>
+      <!--                  [options]="cities" [(ngModel)]="selectedCity" -->
+<!--      -->
+
+    </div>
+  </form>
+  <div class="add-edit-item_actions">
+    <p-button label="cancel"
+              [link]="true"></p-button>
+    <p-button label="Submit"></p-button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  label {
+    width: 100%;
+    color: var(--primary-color);
+    font-weight: bolder;
+  }
+}
