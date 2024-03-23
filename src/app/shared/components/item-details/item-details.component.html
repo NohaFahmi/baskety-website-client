@@ -1,1 +1,33 @@
-<p>item-details works!</p>
+<div class="item-details_container">
+  <div class="item-details_header">
+    <p-button [link]="true" icon="pi pi-arrow-left" />
+    <span class="item-details_header-actions">
+      <p-button [link]="true" icon="pi pi-trash" />
+      <p-button [link]="true" icon="pi pi-pencil" />
+    </span>
+  </div>
+  <div class="item-details_wrapper">
+    <img ngSrc="assets/images/shopping-list-illustration.png" width="1024" height="1024" alt="item-img"/>
+    <div class="item-info">
+      <p class="item-info-label">
+        name
+      </p>
+      <p class="item-info-value">item name</p>
+    </div>
+    <div class="item-info">
+      <p class="item-info-label">
+        categroy
+      </p>
+      <p class="item-info-value">item name</p>
+    </div>
+    <div class="item-info">
+      <p class="item-info-label">
+        description
+      </p>
+      <p class="item-info-value">item name</p>
+    </div>
+  </div>
+  <div class="item-details_actions">
+    <p-button label="Add to list" class="add-btn"></p-button>
+  </div>
+</div>
