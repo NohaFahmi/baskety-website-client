@@ -1,1 +1,20 @@
-<p>stats works!</p>
+<div class="stats-page">
+  <div class="stats-page_top-content">
+    <div class="stats-page_top-items">
+      <h4>Top Items</h4>
+      <p-chart type="bar" [data]="topItemsData"
+               [options]="barOptions"></p-chart>
+    </div>
+    <div class="stats-page_top-categories">
+      <h4>Top Categories</h4>
+      <p-chart type="bar" [data]="topCategoriesData"
+               [options]="barOptions"></p-chart>
+    </div>
+  </div>
+  <div class="stats-page_summary-content">
+    <div class="stats-page_monthly-summary">
+      <h4>Monthly Summary</h4>
+      <p-chart type="line" [data]="monthlySummaryData" [options]="lineOptions"></p-chart>
+    </div>
+  </div>
+</div>

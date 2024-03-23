@@ -1,0 +1,36 @@
+.stats-page {
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  h4 {
+    margin: 0;
+    color: var(--text-color-green);
+  }
+  &_top-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 30px;
+  }
+  &_top-items, &_top-categories  {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &_summary-content {
+    width: 100%;
+    padding: 0 30px;
+  }
+  &_monthly-summary {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
