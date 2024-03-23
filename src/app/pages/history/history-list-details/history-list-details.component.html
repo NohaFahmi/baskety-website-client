@@ -1,1 +1,14 @@
-<p>history-list-details works!</p>
+<div class="list-details">
+  <p-button icon="pi pi-arrow-left"
+            [routerLink]="'/app/history'"
+            [link]="true"
+            label="back"></p-button>
+  <h3 class="page-title">Eero’s farewell party</h3>
+  <div class="info-date">
+            <i class="pi pi-calendar"></i>
+            <p>Mon 27.8.2020</p>
+  </div>
+  <div class="list-details_content">
+    <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.VIEW"></app-items-list-section>
+  </div>
+</div>

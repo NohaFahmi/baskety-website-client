@@ -1,0 +1,22 @@
+.list-details {
+  padding: 50px 0;
+  ::ng-deep {
+    .p-button {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .page-title {
+    margin: 20px auto;
+  }
+  .info-date {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--subtle-color);
+    margin: 30px auto;
+    p {
+      margin: 0;
+    }
+  }
+}

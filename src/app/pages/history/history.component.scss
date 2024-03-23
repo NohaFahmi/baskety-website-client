@@ -1,0 +1,97 @@
+.history-page {
+  padding: 50px 0;
+  p, h1 {
+    margin: 0;
+  }
+  ::ng-deep {
+    .p-card-body {
+      width: 100%;
+    }
+    .p-card-content {
+      padding: 0;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      @media(max-width: 600px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+  }
+  .list-cards__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .lists-groups-by-date {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    &_date-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    &_title {
+      color: var(--subtle-color);
+    }
+    .list-card {
+      &__list-title {
+        color: var(--text-color-green);
+        font-weight: bolder;
+      }
+      &__info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        @media(max-width: 600px) {
+          gap: 20px;
+        }
+        &-date {
+          display: flex;
+          align-items: center;
+          color: var(--subtle-color);
+          gap: 5px;
+        }
+        .wrapper {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+        &-status {
+          border: 2px solid;
+          border-radius: 10px;
+          font-weight: bolder;
+          width: 115px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.completed {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+          }
+          &.canceled {
+            color: var(--alert-color);
+            border-color: var(--alert-color);
+          }
+        }
+        ::ng-deep {
+          .p-button.p-button-link {
+            color: var(--highlight-color);
+            &:hover {
+              color: var(--highlight-color);
+            }
+            &:focus {
+              box-shadow: none;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
