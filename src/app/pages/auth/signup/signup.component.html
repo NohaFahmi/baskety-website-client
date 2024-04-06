@@ -2,40 +2,43 @@
   <div class="auth-container">
     <div class="auth-form-wrapper">
       <h1 class="page-title">Signup</h1>
-      <form class="auth-form">
+      <form class="auth-form" [formGroup]="signupForm">
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-user"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Username" />
+          <input pInputText placeholder="Username" formControlName="username"/>
         </p-inputGroup>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-envelope"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Email" />
+          <input pInputText placeholder="Email" formControlName="email"/>
         </p-inputGroup>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Password" />
+          <input pInputText placeholder="Password" formControlName="password"/>
         </p-inputGroup>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Confirm Password" />
+          <input pInputText placeholder="Confirm Password" formControlName="confirmPassword"/>
         </p-inputGroup>
 
-        <button pButton pRipple label="Submit" class="submit-btn"></button>
+        <button pButton pRipple label="Submit" class="submit-btn"
+                (click)="onSignup()"
+                [disabled]="signupForm.invalid ||
+                signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value"></button>
       </form>
     </div>
     <div class="illustration-side">
       <img ngSrc="assets/images/illustration-2.png" alt="auth-illustration" height="500" width="500"/>
       <p class="auth-text">
         Already a member?
-        <p-button label="login here"
+        <p-button label="Login here"
                   [link]="true"
                   [routerLink]="'/auth/login'"
                   class="btn-link"></p-button>
