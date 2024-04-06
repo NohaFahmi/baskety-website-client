@@ -3,10 +3,11 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
-import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "./environments/environment";
 import {getAuth, provideAuth} from "@angular/fire/auth";
+import {httpInterceptor} from "./core/interceptors/http.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
     }),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideAuth(() => getAuth()),

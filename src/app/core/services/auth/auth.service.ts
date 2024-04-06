@@ -6,12 +6,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  onAuthStateChanged,
   signOut, user,
 } from '@angular/fire/auth';
-import {map, Observable, of, tap} from "rxjs";
-import firebase from "firebase/compat";
+import {firstValueFrom, from, map, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
+import {IUser} from "../../../shared/interfaces/user.interface";
+import {UserService} from "../user/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,31 +20,37 @@ export class AuthService {
   user$: Observable<any | null>;
   isSignedIn: boolean = false;
   constructor(private httpService: HttpService,
-              private auth: Auth, private router: Router) {
+              private auth: Auth,
+              private router: Router,
+              private userService: UserService) {
     this.user$ = new Observable(user => this.auth.onAuthStateChanged(user));
   }
 
   emailSignup(signupInfo: any): Promise<any> {
-    return createUserWithEmailAndPassword(this.auth, signupInfo.email, signupInfo.password);
+    return new Promise((resolve, reject) => {
+      createUserWithEmailAndPassword(this.auth, signupInfo.email, signupInfo.password).then((data: any) => {
+        if (data) {
+          const newUser:IUser = {
+            email: data.user.email,
+            username: data.user.displayName,
+            emailVerified: data.user.emailVerified,
+            uid: data.user.uid,
+            photoURL: data.user.photoURL
+          }
+          this.userService.saveUserInDB(newUser).then(() => {
+            this.saveAccessToken(data?.user?.accessToken);
+            resolve(data);
+          }).catch((error) => {
+            let currentUser = this.auth.currentUser;
+            currentUser?.delete();
+            reject(error);
+          })
+        }
+      }).catch((error) => {
+        reject(error);
+      })
+    })
   }
-
-  // createUserInDB(userInfo: IUserInfo): Promise<any> {
-  //   return this.httpService.post('users/create', {
-  //     uid: userInfo.uid,
-  //     email: userInfo.email,
-  //     username: userInfo.displayName,
-  //     photoURL: userInfo.photoURL,
-  //     emailVerified: userInfo.emailVerified
-  //   })
-  // }
-
-  // getUserByUUID(user: IUserInfo): Observable<any> {
-  //   return this.httpService.get(`users/getById/${user.uid}`);
-  // }
-  //
-  // updateUserInDB(userInfo: IUserInfo): Observable<any> {
-  //   return this.httpService.put(`users/update`, userInfo);
-  // }
 
   loginWithEmail(loginInfo: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -77,9 +83,12 @@ export class AuthService {
   }
   isLoggedIn(): Observable<boolean> {
     return this.user$.pipe(
-      tap(user => {
+      tap((user: any) => {
         console.log('USER', user);
-      this.isSignedIn = !!user;
+        this.isSignedIn = !!user;
+        if (this.isSignedIn) {
+          this.userService.getUserFromDBByUid(user);
+        }
       return !!user;
     }));
   }

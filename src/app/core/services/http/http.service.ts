@@ -7,7 +7,7 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class HttpService {
-  private API_URL = environment.apiURL;
+  private API_URL ='http://localhost:4000/api/v1/';
   constructor(private httpClient: HttpClient) {
   }
 
