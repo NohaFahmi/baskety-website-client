@@ -25,9 +25,12 @@
                 [routerLink]="'/app/stats'"></p-button>
     </div>
   </div>
-  <div class="side-navigation_list-btn">
+  <div class="side-navigation_actions-btn">
     <button class="btn-icon list-btn" pBadge value="2">
       <i class="pi pi-shopping-cart text-3xl"></i>
+    </button>
+    <button class="btn-icon logout-btn" (click)="onLogout()">
+      <i class="pi pi-sign-out text-3xl"></i>
     </button>
   </div>
 </div>

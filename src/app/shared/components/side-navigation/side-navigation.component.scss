@@ -47,7 +47,10 @@
       }
     }
   }
-  &_list-btn {
+  &_actions-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     ::ng-deep {
       .p-badge {
         transform: translate(40%, -40%);
@@ -73,5 +76,18 @@
         height: 40px;
       }
     }
+    .logout-btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: var(--primary-color);
+      @media(max-width: 1200px) {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
+
 }

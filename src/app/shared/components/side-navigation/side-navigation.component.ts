@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TooltipModule} from "primeng/tooltip";
 import {BadgeModule} from "primeng/badge";
+import {AuthService} from "../../../core/services/auth/auth.service";
 
 @Component({
   selector: 'app-side-navigation',
@@ -20,5 +21,11 @@ import {BadgeModule} from "primeng/badge";
   styleUrl: './side-navigation.component.scss'
 })
 export class SideNavigationComponent {
+  constructor(private authService: AuthService) {
+  }
+
+  onLogout(): void {
+    this.authService.logoutUser();
+  }
 
 }
