@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import {authGuard} from "./core/services/guard/auth-guard/auth.guard";
+import {guestGuard} from "./core/services/guard/guest-guard/guest.guard";
 
 
 export const routes: Routes = [
@@ -20,6 +22,7 @@ export const routes: Routes = [
   {
     path: 'app',
     loadComponent: () => import('./pages/layout/layout.component').then(c => c.LayoutComponent),
+    canActivate: [authGuard],
     children: [
       {
         path: 'home',
@@ -37,7 +40,8 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.routes').then(routes => routes.AuthRoutes)
+    loadChildren: () => import('./pages/auth/auth.routes').then(routes => routes.AuthRoutes),
+    canActivate:[guestGuard]
   },
   // TODO: add not found route
 ];

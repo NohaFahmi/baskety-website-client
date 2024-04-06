@@ -1,4 +1,5 @@
 import {Routes} from "@angular/router";
+import {guestGuard} from "../../core/services/guard/guest-guard/guest.guard";
 
 export const AuthRoutes: Routes = [
   {
@@ -8,10 +9,11 @@ export const AuthRoutes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.component').then(c => c.LoginComponent)
+    loadComponent: () => import('./login/login.component').then(c => c.LoginComponent),
   },
   {
     path: 'signup',
-    loadComponent: () => import('./signup/signup.component').then(c => c.SignupComponent)
+    loadComponent: () => import('./signup/signup.component').then(c => c.SignupComponent),
+
   }
 ]
