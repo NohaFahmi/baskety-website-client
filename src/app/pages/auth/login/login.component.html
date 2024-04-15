@@ -9,14 +9,20 @@
           </p-inputGroupAddon>
           <input pInputText placeholder="Email" formControlName="email"/>
         </p-inputGroup>
+        <small class="p-error">{{getFormValidationErrors(loginForm.get('email'))}}</small>
+
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
           <input pInputText placeholder="Password" formControlName="password" type="password"/>
         </p-inputGroup>
+        <small class="p-error">{{getFormValidationErrors(loginForm.get('password'))}}</small>
 
-        <button pButton pRipple label="Login" class="submit-btn" (click)="login()" [disabled]="loginForm.invalid"></button>
+        <button pButton pRipple label="Login" class="submit-btn"
+                [loading]="isLoading"
+                [disabled]="loginForm.invalid"
+                (click)="login()"></button>
       </form>
     </div>
     <div class="illustration-side">

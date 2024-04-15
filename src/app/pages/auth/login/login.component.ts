@@ -9,6 +9,7 @@ import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth/auth.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {emailPattern, getFormValidationErrors, passwordPattern} from "../../../shared/helpers/helpers";
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -31,20 +32,27 @@ export class LoginComponent {
   isLoading: boolean = false;
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+      email: new FormControl('', Validators.compose(
+        [Validators.required,
+          Validators.pattern(emailPattern)])),
+      password: new FormControl('', Validators.compose(
+        [Validators.required, Validators.pattern(passwordPattern)]
+      )),
     })
   }
 
   login(): void {
-    console.log(this.loginForm.value);
     this.isLoading = true;
     this.authService.loginWithEmail(this.loginForm.value).then((user) => {
-      this.router.navigate(['/app'])
+      if (user) {
+        this.router.navigate(['/app'])
+      }
     }).catch((error) => {
       console.log('ERROR', error);
     }).finally(() => {
       this.isLoading = false;
     })
   }
+
+    protected readonly getFormValidationErrors = getFormValidationErrors;
 }

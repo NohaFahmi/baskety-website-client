@@ -7,31 +7,36 @@
           <p-inputGroupAddon>
             <i class="pi pi-user"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Username" formControlName="username"/>
+          <input pInputText placeholder="Username"
+                 formControlName="username" />
         </p-inputGroup>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-envelope"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Email" formControlName="email"/>
+          <input pInputText placeholder="Email" formControlName="email" />
         </p-inputGroup>
+        <small class="p-error">{{getFormValidationErrors(signupForm.get('email'))}}</small>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Password" formControlName="password"/>
+          <input pInputText placeholder="Password" formControlName="password" type="password"/>
         </p-inputGroup>
+        <small class="p-error">{{getFormValidationErrors(signupForm.get('password'))}}</small>
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Confirm Password" formControlName="confirmPassword"/>
+          <input pInputText placeholder="Confirm Password" formControlName="confirmPassword" type="password"/>
         </p-inputGroup>
+        <small class="p-error">{{getFormValidationErrors(signupForm.get('confirmPassword'))}}</small>
 
         <button pButton pRipple label="Submit" class="submit-btn"
-                (click)="onSignup()"
                 [disabled]="signupForm.invalid ||
-                signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value"></button>
+                signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value"
+                [loading]="isLoading"
+                (click)="onSignup()"></button>
       </form>
     </div>
     <div class="illustration-side">
