@@ -1,5 +1,11 @@
 <div class="add-edit-item_container" *ngIf="categoriesList.length > 0">
-  <h3 class="add-edit-item_title">{{isEdit ? 'Edit item' : 'Add a new item'}}</h3>
+    <div class="add-edit-item_header">
+      <p-button icon="pi pi-arrow-left"
+                [link]="true"
+                (onClick)="backInView()"></p-button>
+      <h3 class="add-edit-item_title">{{isEdit ? 'Edit item' : 'Add a new item'}}</h3>
+    </div>
+
   <form class="add-edit-item_form" [formGroup]="itemForm">
     <div class="input-group">
       <label for="item-name">Name</label>

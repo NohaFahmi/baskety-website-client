@@ -7,6 +7,17 @@
     height: 100%;
     overflow-y: scroll;
   }
+  &_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    ::ng-deep p-button {
+      button {
+        width: fit-content;
+      }
+    }
+  }
   &_form {
     display: flex;
     flex-direction: column;

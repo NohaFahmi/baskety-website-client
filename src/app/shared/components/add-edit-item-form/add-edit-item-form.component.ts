@@ -1,4 +1,4 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {FileUploadModule} from "primeng/fileupload";
@@ -8,8 +8,8 @@ import {ICategory} from "../../interfaces/category.interface";
 import {NgIf} from "@angular/common";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {getFormValidationErrors} from "../../helpers/helpers";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ItemService} from "../../../core/services/item/item.service";
+import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 
 @Component({
   selector: 'app-add-edit-item-form',
@@ -27,6 +27,7 @@ import {ItemService} from "../../../core/services/item/item.service";
 })
 export class AddEditItemFormComponent{
   @Input() isEdit = false;
+  @Output() onBackInView: EventEmitter<SIDENAV_VIEWS> = new EventEmitter<SIDENAV_VIEWS>();
   categoriesList: ICategory[] = [];
   itemForm: FormGroup;
   isLoading = false;
@@ -82,6 +83,10 @@ export class AddEditItemFormComponent{
   }
 
   onCancel(): void {
+    this.backInView();
+  }
+  backInView(): void {
+    this.onBackInView.emit(SIDENAV_VIEWS.SHOPPING_LIST);
     this.itemForm.reset();
   }
 }
