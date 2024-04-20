@@ -8,6 +8,7 @@ import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "./environments/environment";
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {httpInterceptor} from "./core/interceptors/http.interceptor";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
         registrationStrategy: 'registerWhenStable:30000'
     }),
     provideHttpClient(withInterceptors([httpInterceptor])),
+    provideAnimations(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideAuth(() => getAuth()),
