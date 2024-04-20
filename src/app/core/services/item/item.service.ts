@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "../http/http.service";
 import {lastValueFrom} from "rxjs";
-import {IItem} from "../../../shared/interfaces/item.interface";
+import {IItem, IItemList} from "../../../shared/interfaces/item.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,9 @@ export class ItemService {
 
   getAllItems(): Promise<IItem[]> {
     return lastValueFrom(this.httpService.get('item'))
+  }
+  getAllItemsGroupedByCategories(): Promise<IItemList[]> {
+    return lastValueFrom(this.httpService.get('item/grouped'))
   }
   getItemById(itemId: string): Promise<IItem> {
     return lastValueFrom(this.httpService.get(`item/${itemId}`))

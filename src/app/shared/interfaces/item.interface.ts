@@ -8,3 +8,8 @@ export interface IItem {
   category: string;
   quantityUnit:string;
 }
+
+export interface IItemList {
+  categoryName: string[];
+  items: IItem[]
+}
