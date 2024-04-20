@@ -1,0 +1,5 @@
+export enum SIDENAV_VIEWS {
+  ADD_EDIT_ITEM= 1,
+  ITEM_DETAILS,
+  SHOPPING_LIST
+}
