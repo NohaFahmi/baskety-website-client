@@ -2,6 +2,7 @@ import {Component, Input, signal} from '@angular/core';
 import {NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {CheckboxModule} from "primeng/checkbox";
 import {FormsModule} from "@angular/forms";
+import {IItem} from "../../interfaces/item.interface";
 
 export enum ITEM_CARD_MODES {
   ADD = 'add',
@@ -24,12 +25,7 @@ export enum ITEM_CARD_MODES {
 })
 export class ItemCardComponent {
   @Input() mode?: ITEM_CARD_MODES = ITEM_CARD_MODES.ADD;
-  @Input() item?: {
-    itemName: string;
-    itemCount: number;
-    itemPrice: number;
-    itemCompleted: boolean;
-  };
+  @Input() item?: IItem;
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
   isCountExtended = false;
   checked: any;

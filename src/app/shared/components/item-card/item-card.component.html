@@ -5,7 +5,7 @@
 <!--              id="itemCard"></p-checkbox>-->
 <!-- <label for="itemCard">-->
    <p class="item-card_name">
-     <span>{{item?.itemName}}</span>
+     <span>{{item?.name}}</span>
    </p>
    <ng-container [ngSwitch]="mode">
      <ng-template [ngSwitchCase]="ITEM_CARD_MODES.ADD">
@@ -15,7 +15,7 @@
      </ng-template>
      <ng-template [ngSwitchCase]="ITEM_CARD_MODES.VIEW">
        <p class="item-card_count">
-         {{item?.itemCount}} pcs
+         {{item?.quantity}} {{item?.quantityUnit}}
        </p>
      </ng-template>
      <ng-template [ngSwitchCase]="ITEM_CARD_MODES.EDIT">
@@ -26,7 +26,7 @@
          <span class="decrease-count" *ngIf="isCountExtended">
           <i class="pi pi-minus"></i>
         </span>
-        <span class="item-count" (click)="onEditItemCount()">{{item?.itemCount}} pcs</span>
+        <span class="item-count" (click)="onEditItemCount()">{{item?.quantity}} pcs</span>
         <span class="increase-count" *ngIf="isCountExtended">
           <i class="pi pi-plus"></i>
         </span>

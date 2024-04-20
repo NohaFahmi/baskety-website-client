@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ITEM_CARD_MODES, ItemCardComponent} from "../item-card/item-card.component";
 import {NgClass, NgForOf} from "@angular/common";
+import {IItemList} from "../../interfaces/item.interface";
 
 @Component({
   selector: 'app-items-list-section',
@@ -15,7 +16,7 @@ import {NgClass, NgForOf} from "@angular/common";
 })
 export class ItemsListSectionComponent {
   @Input() itemBtnMode?: ITEM_CARD_MODES;
-  @Input() items?: any[];
+  @Input() items?: IItemList[];
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
   protected readonly Object = Object;
 }
