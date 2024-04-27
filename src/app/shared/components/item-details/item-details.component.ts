@@ -1,17 +1,25 @@
-import { Component } from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import {ButtonModule} from "primeng/button";
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
+import {IItem} from "../../interfaces/item.interface";
+import {SideViewsService} from "../../services/side-views/side-views.service";
 
 @Component({
   selector: 'app-item-details',
   standalone: true,
   imports: [
     ButtonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgIf
   ],
   templateUrl: './item-details.component.html',
   styleUrl: './item-details.component.scss'
 })
 export class ItemDetailsComponent {
 
+
+  constructor(public sideViewsService: SideViewsService) {
+  }
+  addItemToList(): void {
+  }
 }
