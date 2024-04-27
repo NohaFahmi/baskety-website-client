@@ -6,6 +6,7 @@ import {AddEditItemFormComponent} from "../add-edit-item-form/add-edit-item-form
 import {ItemDetailsComponent} from "../item-details/item-details.component";
 import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
+import {SideViewsService} from "../../services/side-views/side-views.service";
 
 @Component({
   selector: 'app-side-view-container',
@@ -24,6 +25,7 @@ import {NgSwitch, NgSwitchCase} from "@angular/common";
 })
 export class SideViewContainerComponent {
   sidebarVisible = true;
-  currentView: SIDENAV_VIEWS = SIDENAV_VIEWS.ADD_EDIT_ITEM;
   protected readonly SIDENAV_VIEWS = SIDENAV_VIEWS;
+  constructor(public sideViewsService: SideViewsService) {
+  }
 }

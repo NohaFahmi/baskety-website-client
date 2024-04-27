@@ -1,11 +1,12 @@
 <div class="page-container">
   <div class="app-side-navigation-container">
-    <app-side-navigation (toggleSideView)="onToggleSideView($event)"></app-side-navigation>
+    <app-side-navigation></app-side-navigation>
   </div>
   <div class="app-content-container">
     <router-outlet></router-outlet>
   </div>
-  <div class="app-right-view-container" [ngClass]="{'visible': isOpen}">
+  <div class="app-right-view-container"
+       [ngClass]="{'visible': sideViewsService.isSideViewOpen()}">
     <app-side-view-container></app-side-view-container>
   </div>
 </div>

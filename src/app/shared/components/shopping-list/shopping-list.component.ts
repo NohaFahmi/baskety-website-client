@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {ItemsListSectionComponent} from "../items-list-section/items-list-section.component";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputTextModule} from "primeng/inputtext";
 import {ITEM_CARD_MODES} from "../item-card/item-card.component";
+import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
+import {SideViewsService} from "../../services/side-views/side-views.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -56,4 +58,9 @@ export class ShoppingListComponent {
     //   ]
     // }
   ]
+  constructor(public sideViewsService: SideViewsService) {
+  }
+  navigateToAddingItemView() {
+    this.sideViewsService.updateCurrentSideView(SIDENAV_VIEWS.ADD_EDIT_ITEM);
+  }
 }

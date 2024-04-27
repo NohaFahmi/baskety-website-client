@@ -5,6 +5,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TooltipModule} from "primeng/tooltip";
 import {BadgeModule} from "primeng/badge";
 import {AuthService} from "../../../core/services/auth/auth.service";
+import {SideViewsService} from "../../services/side-views/side-views.service";
 
 @Component({
   selector: 'app-side-navigation',
@@ -21,18 +22,16 @@ import {AuthService} from "../../../core/services/auth/auth.service";
   styleUrl: './side-navigation.component.scss'
 })
 export class SideNavigationComponent {
-  @Output() toggleSideView: EventEmitter<boolean> = new EventEmitter<boolean>();
-  isSideViewOpened = true;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              public sideViewsService: SideViewsService) {
   }
 
   onLogout(): void {
     this.authService.logoutUser();
   }
 
-  openSideView(isSideViewOpened: boolean): void {
-    this.isSideViewOpened = isSideViewOpened;
-    this.toggleSideView.emit(this.isSideViewOpened)
+  openSideView(): void {
+    this.sideViewsService.toggleDisplaySideView();
   }
 }
