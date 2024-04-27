@@ -25,4 +25,9 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  onToggleSideView($event: boolean) {
+    this.isOpen = $event;
+    console.log(this.isOpen);
+  }
 }

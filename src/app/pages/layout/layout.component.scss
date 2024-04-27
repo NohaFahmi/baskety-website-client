@@ -41,6 +41,9 @@
     background-color: var(--bg-color);
     &.visible {
       right: 0;
+      @media(max-width: 1200px) {
+        display:  block;
+      }
     }
     @media(max-width: 1200px) {
       display: none;

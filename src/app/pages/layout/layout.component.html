@@ -1,6 +1,6 @@
 <div class="page-container">
   <div class="app-side-navigation-container">
-    <app-side-navigation></app-side-navigation>
+    <app-side-navigation (toggleSideView)="onToggleSideView($event)"></app-side-navigation>
   </div>
   <div class="app-content-container">
     <router-outlet></router-outlet>
