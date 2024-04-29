@@ -5,8 +5,11 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputGroupModule} from "primeng/inputgroup";
 import {ITEM_CARD_MODES, ItemCardComponent} from "../../shared/components/item-card/item-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {ItemsListSectionComponent} from "../../shared/components/items-list-section/items-list-section.component";
+import {ItemService} from "../../core/services/item/item.service";
+import {IItem, IItemList} from "../../shared/interfaces/item.interface";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @Component({
   selector: 'app-home',
@@ -19,46 +22,35 @@ import {ItemsListSectionComponent} from "../../shared/components/items-list-sect
     InputGroupModule,
     ItemCardComponent,
     NgForOf,
-    ItemsListSectionComponent
+    ItemsListSectionComponent,
+    ProgressSpinnerModule,
+    NgIf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
-  itemsList = [
-    {
-      "Fruits": [
-        {
-          "itemName": "Apples",
-          "itemCount": "10",
-          "itemPrice": "2.99",
-          "itemCompleted": true
-        },
-        {
-          "itemName": "Oranges",
-          "itemCount": "8",
-          "itemPrice": "1.99",
-          "itemCompleted": false
-        }
-      ]
-    },
-    {
-      "Vegetables": [
-        {
-          "itemName": "Carrots",
-          "itemCount": "5",
-          "itemPrice": "0.99",
-          "itemCompleted": true
-        },
-        {
-          "itemName": "Broccoli",
-          "itemCount": "2",
-          "itemPrice": "1.50",
-          "itemCompleted": false
-        }
-      ]
-    }
-  ]
+  itemsList: IItemList[] = [];
+  isLoading = false;
+
+  constructor(private itemService: ItemService) {
+
+  }
+
+  ngOnInit(): void {
+    this.loadItemsList()
+  }
+
+  loadItemsList(): void {
+    this.isLoading = true;
+    this.itemService.getAllItemsGroupedByCategories().then((items) => {
+      this.itemsList = items;
+    }).catch((error) => {
+      console.error(error);
+    }).finally(() => {
+      this.isLoading = false;
+    })
+  }
 
 }
