@@ -6,6 +6,7 @@ import {NgClass} from "@angular/common";
 import {AuthService} from "../../core/services/auth/auth.service";
 import {UserService} from "../../core/services/user/user.service";
 import {SideViewsService} from "../../shared/services/side-views/side-views.service";
+import {ShoppingListService} from "../../shared/services/shopping-list/shopping-list.service";
 
 @Component({
   selector: 'app-layout',
@@ -21,14 +22,9 @@ import {SideViewsService} from "../../shared/services/side-views/side-views.serv
 })
 export class LayoutComponent implements OnInit {
   isOpen = true;
-  constructor(private userService: UserService, public sideViewsService: SideViewsService) {
+  constructor(private shoppingListService: ShoppingListService, public sideViewsService: SideViewsService) {
   }
   ngOnInit() {
-
-  }
-
-  onToggleSideView($event: boolean) {
-    this.isOpen = $event;
-    console.log(this.isOpen);
+    this.shoppingListService.getCurrentShoppingList();
   }
 }
