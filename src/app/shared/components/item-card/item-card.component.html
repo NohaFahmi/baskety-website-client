@@ -4,12 +4,12 @@
 <!--              inputId="itemCard"-->
 <!--              id="itemCard"></p-checkbox>-->
 <!-- <label for="itemCard">-->
-   <p class="item-card_name">
+   <p class="item-card_name" (click)="viewItemDetails(item?._id ?? '')">
      <span>{{item?.name}}</span>
    </p>
    <ng-container [ngSwitch]="mode">
      <ng-template [ngSwitchCase]="ITEM_CARD_MODES.ADD">
-       <button class="add-item-btn btn-icon">
+       <button class="add-item-btn btn-icon" (click)="onAddingItemToList(item)">
          <i class="pi pi-plus"></i>
        </button>
      </ng-template>
@@ -20,14 +20,14 @@
      </ng-template>
      <ng-template [ngSwitchCase]="ITEM_CARD_MODES.EDIT">
        <button class="item-card_count-btn" [ngClass]="{'extended':  isCountExtended}">
-         <span class="remove-item" *ngIf="isCountExtended">
+         <span class="remove-item" *ngIf="isCountExtended" (click)="removeItemFromList(item)">
            <i class="pi pi-trash"></i>
          </span>
-         <span class="decrease-count" *ngIf="isCountExtended">
+         <span class="decrease-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item)">
           <i class="pi pi-minus"></i>
         </span>
         <span class="item-count" (click)="onEditItemCount()">{{item?.quantity}} pcs</span>
-        <span class="increase-count" *ngIf="isCountExtended">
+        <span class="increase-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item)">
           <i class="pi pi-plus"></i>
         </span>
        </button>

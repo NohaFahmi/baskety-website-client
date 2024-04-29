@@ -5,8 +5,9 @@ export interface IItem {
   imageURL?: string;
   price: number;
   quantity: number;
-  category: string;
+  category?: string;
   quantityUnit:string;
+  categoryId?: string;
 }
 
 export interface IItemList {
