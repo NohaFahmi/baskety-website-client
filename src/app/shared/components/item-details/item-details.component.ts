@@ -1,8 +1,10 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {IItem} from "../../interfaces/item.interface";
 import {SideViewsService} from "../../services/side-views/side-views.service";
+import {CategoryService} from "../../../core/services/category/category.service";
+import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 
 @Component({
   selector: 'app-item-details',
@@ -17,9 +19,21 @@ import {SideViewsService} from "../../services/side-views/side-views.service";
 })
 export class ItemDetailsComponent {
 
-
-  constructor(public sideViewsService: SideViewsService) {
+  @Output() onBackInView: EventEmitter<SIDENAV_VIEWS> = new EventEmitter<SIDENAV_VIEWS>();
+  constructor(public sideViewsService: SideViewsService, private categoryService: CategoryService) {
   }
   addItemToList(): void {
+  }
+
+  getItemCategoryName(categoryId?: string): string | undefined {
+    if (this.categoryService.categoriesList().length > 0) {
+      return this.categoryService.categoriesList().find((category) => category._id === categoryId)?.name;
+    } else {
+      return '';
+    }
+  }
+
+  backInView(): void {
+    this.onBackInView.emit(SIDENAV_VIEWS.SHOPPING_LIST);
   }
 }
