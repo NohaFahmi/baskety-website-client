@@ -42,7 +42,7 @@ export class AddEditItemFormComponent{
       // imageURL: new FormControl('', Validators.required),
       price: new FormControl(0, Validators.required),
       quantity: new  FormControl(0, Validators.required),
-      category: new FormControl('', Validators.required),
+      categoryId: new FormControl('', Validators.required),
       quantityUnit: new FormControl('', Validators.required)
     })
   }
