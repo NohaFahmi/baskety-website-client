@@ -6,10 +6,18 @@ export enum ShoppingListStatus {
   CANCELLED = 'canceled'
 }
 export interface IList {
-  _id?: string;
-  name: string;
+  _id?: string;name?: string;
   status?: ShoppingListStatus;
   completedAt?: Date;
   userId?: string;
-  items: IItem[];
+  items?: IItem[];
 }
+export interface IListReq {
+  _id?: string;
+  name?: string;
+  status?: ShoppingListStatus;
+  completedAt?: Date;
+  userId?: string;
+  items?: string[];
+}
+
