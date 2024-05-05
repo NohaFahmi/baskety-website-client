@@ -12,7 +12,7 @@ import {ShoppingListService} from "../shopping-list/shopping-list.service";
 export class SideViewsService {
   currentView = signal<SIDENAV_VIEWS>(SIDENAV_VIEWS.SHOPPING_LIST);
   itemDetails = signal<IItem | null>(null);
-  isSideViewOpen = signal<boolean>(false);
+  isSideViewOpen = signal<boolean>(true);
   constructor(private itemService: ItemService,
               private shoppingListService: ShoppingListService) { }
 

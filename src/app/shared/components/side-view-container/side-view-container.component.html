@@ -1,7 +1,7 @@
 <div class="side-views-container">
  <ng-container [ngSwitch]="sideViewsService.currentView()">
    <ng-template [ngSwitchCase]="SIDENAV_VIEWS.SHOPPING_LIST">
-     <app-shopping-list></app-shopping-list>
+     <app-shopping-list [shoppingList]="shoppingListService.currentShoppingList()"></app-shopping-list>
    </ng-template>
    <ng-template [ngSwitchCase]="SIDENAV_VIEWS.ADD_EDIT_ITEM">
      <app-add-edit-item-form (onBackInView)="sideViewsService.updateCurrentSideView($event)"></app-add-edit-item-form>

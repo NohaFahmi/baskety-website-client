@@ -9,25 +9,33 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="itemsList.length > 0">
+  <ng-container *ngIf="shoppingList">
     <div class="shopping-list_content">
       <div class="shopping-list_content__title">
-        <input type="text" pInputText placeholder="Enter a list title" disabled/>
+        <input type="text" pInputText placeholder="Enter a list title" [formControl]="listTitle"/>
         <button type="button" pButton
-                class="p-button-plain" icon="pi pi-pencil"></button>
+                class="p-button-plain" icon="pi pi-pencil" (click)="onEditListTitle()" *ngIf="!isEditMode"></button>
+        <button type="button" pButton
+                class="p-button-plain" icon="pi pi-save" (click)="onChangeListTitle()" *ngIf="isEditMode"></button>
       </div>
-      <div class="shopping-list_content__items">
-        <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.EDIT" [items]="itemsList"></app-items-list-section>
-      </div>
+     <ng-container *ngIf="shoppingList!.items">
+       <div class="shopping-list_content__items" *ngIf="shoppingList!.items as listItems">
+         <app-item-card *ngFor="let item of listItems"
+                        [mode]="ITEM_CARD_MODES.EDIT"
+                        [item]="item"
+                        (onRemoveItemFromList)="updateList($event)"
+                        (updateItemQuantity)="updateItemOnList($event)"></app-item-card>
+       </div>
+     </ng-container>
     </div>
-    <div class="shopping-list_footer">
+    <div class="shopping-list_footer" *ngIf="shoppingList">
       <p-button class="cancel-btn"
                 label="Cancel"
-                [link]="true"></p-button>
-      <p-button class="complete-btn" label="Complete"></p-button>
+                [link]="true" (onClick)="onCancelList(this.shoppingList)"></p-button>
+      <p-button class="complete-btn" label="Complete" (onClick)="onCompleteList(this.shoppingList)"></p-button>
     </div>
   </ng-container>
-  <div *ngIf="itemsList.length === 0" class="shopping-list_empty">
+  <div *ngIf="!shoppingList" class="shopping-list_empty">
     <p class="shopping-list_empty-message">No items in the list</p>
 <!--    <img ngSrc="./assets/images/shopping-list-illustration.png" alt="empty-shopping-list" width="1024" height="1024"/>-->
   </div>

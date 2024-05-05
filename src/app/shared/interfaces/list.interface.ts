@@ -18,6 +18,6 @@ export interface IListReq {
   status?: ShoppingListStatus;
   completedAt?: Date;
   userId?: string;
-  items?: string[];
+  items?: IItem[];
 }
 

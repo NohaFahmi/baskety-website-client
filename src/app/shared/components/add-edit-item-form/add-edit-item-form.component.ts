@@ -72,10 +72,8 @@ export class AddEditItemFormComponent{
   //   this.httpService.post(`${driveUrl}?uploadType=multipart`, formData, { headers });
   // }
   onItemCreation(): void {
-    console.log(this.itemForm.value);
     this.isLoading = true;
     this.itemService.createItem(this.itemForm.value).then((item) => {
-      console.log('item', item);
       this.itemForm.reset();
     }).catch((error) => {
       console.log('erer', error);

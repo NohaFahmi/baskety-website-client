@@ -7,7 +7,7 @@
   justify-content: space-between;
   width: fit-content;
   padding: 20px;
-  font-size: 16px;
+  font-size: 15px;
   gap: 40px;
   cursor: pointer;
   &.in-list {
@@ -43,15 +43,16 @@
     background-color: var(--bg-color);
     height: 40px;
     border-radius: 10px;
-    padding: 0 15px 0 0;
+    //padding: 0 15px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     color: var(--subtle-color);
     transition: all 0.5s ease-in-out;
+    padding: 0;
     &.extended {
-      padding: 0 10px 0 0;
+      padding: 0;
       background-color: #f3f3f2 !important;
       .remove-item {
         background-color: var(--subtle-color);

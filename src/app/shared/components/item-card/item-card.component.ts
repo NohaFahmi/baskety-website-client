@@ -1,4 +1,4 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {CheckboxModule} from "primeng/checkbox";
 import {FormsModule} from "@angular/forms";
@@ -28,6 +28,8 @@ export enum ITEM_CARD_MODES {
 export class ItemCardComponent {
   @Input() mode?: ITEM_CARD_MODES = ITEM_CARD_MODES.ADD;
   @Input() item?: IItem;
+  @Output() updateItemQuantity: EventEmitter<IItem> = new EventEmitter<IItem>();
+  @Output() onRemoveItemFromList: EventEmitter<IItem> = new EventEmitter<IItem>();
   isCountExtended = false;
   checked: any;
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
@@ -40,8 +42,6 @@ export class ItemCardComponent {
   }
 
   viewItemDetails(itemId: string) {
-    console.log('item', itemId);
-    console.log('mode', this.mode);
     if (this.mode === ITEM_CARD_MODES.ADD) {
       this.sideViewsService.navigateToItemDetailsView(itemId);
     }
@@ -54,11 +54,28 @@ export class ItemCardComponent {
     }
   }
 
-  updateItemCountOnList(item?: IItem) {
+  updateItemCountOnList(item?: IItem, increase?: boolean) {
     // update count
+    if (item) {
+      let quantity = item?.quantity ?? 1;
+      if (increase) {
+        quantity += 1;
+      } else {
+        quantity -= 1;
+      }
+      let updatedItem = item;
+      updatedItem = {
+        ...updatedItem,
+        quantity: quantity
+      }
+      this.updateItemQuantity.emit(updatedItem)
+    }
   }
 
   removeItemFromList(item?: IItem) {
     // remove item from list
+    if (item) {
+      this.onRemoveItemFromList.emit(item);
+    }
   }
 }

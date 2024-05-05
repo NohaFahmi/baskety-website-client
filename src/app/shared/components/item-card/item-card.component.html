@@ -27,7 +27,7 @@
           <i class="pi pi-minus"></i>
         </span>
         <span class="item-count" (click)="onEditItemCount()">{{item?.quantity}} pcs</span>
-        <span class="increase-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item)">
+        <span class="increase-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item, true)">
           <i class="pi pi-plus"></i>
         </span>
        </button>
