@@ -20,12 +20,12 @@
       }
     }
   }
-  .list-cards__wrapper {
+  ::ng-deep.list-cards__wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  .lists-groups-by-date {
+  ::ng-deep.lists-groups-by-date {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -60,24 +60,6 @@
           display: flex;
           gap: 10px;
           flex-wrap: wrap;
-        }
-        &-status {
-          border: 2px solid;
-          border-radius: 10px;
-          font-weight: bolder;
-          width: 115px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          &.completed {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-          }
-          &.canceled {
-            color: var(--alert-color);
-            border-color: var(--alert-color);
-          }
         }
         ::ng-deep {
           .p-button.p-button-link {
