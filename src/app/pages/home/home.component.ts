@@ -31,10 +31,9 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 })
 export class HomeComponent {
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
-  itemsList: IItemList[] = [];
   isLoading = false;
 
-  constructor(private itemService: ItemService) {
+  constructor(protected itemService: ItemService) {
 
   }
 
@@ -45,7 +44,6 @@ export class HomeComponent {
   loadItemsList(): void {
     this.isLoading = true;
     this.itemService.getAllItemsGroupedByCategories().then((items) => {
-      this.itemsList = items;
     }).catch((error) => {
       console.error(error);
     }).finally(() => {

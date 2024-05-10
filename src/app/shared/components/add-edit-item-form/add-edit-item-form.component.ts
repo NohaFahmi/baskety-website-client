@@ -10,6 +10,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {getFormValidationErrors} from "../../helpers/helpers";
 import {ItemService} from "../../../core/services/item/item.service";
 import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
+import {SideViewsService} from "../../services/side-views/side-views.service";
 
 @Component({
   selector: 'app-add-edit-item-form',
@@ -26,7 +27,6 @@ import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
   styleUrl: './add-edit-item-form.component.scss',
 })
 export class AddEditItemFormComponent{
-  @Input() isEdit = false;
   @Output() onBackInView: EventEmitter<SIDENAV_VIEWS> = new EventEmitter<SIDENAV_VIEWS>();
   categoriesList: ICategory[] = [];
   itemForm: FormGroup;
@@ -35,7 +35,7 @@ export class AddEditItemFormComponent{
 
   constructor(private categoriesService: CategoryService,
               private itemService: ItemService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder, protected sideViewsService: SideViewsService) {
     this.itemForm = this.fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -48,6 +48,16 @@ export class AddEditItemFormComponent{
   }
   ngOnInit() {
       this.loadCategories();
+      if (this.sideViewsService.isEditItemMode() && this.sideViewsService.itemDetails()) {
+        this.itemForm.setValue({
+          name: this.sideViewsService.itemDetails()?.name || '',
+          description: this.sideViewsService.itemDetails()?.description || '',
+          price: this.sideViewsService.itemDetails()?.price || '',
+          quantity: this.sideViewsService.itemDetails()?.quantity || '',
+          categoryId: this.sideViewsService.itemDetails()?.categoryId || '',
+          quantityUnit: this.sideViewsService.itemDetails()?.quantityUnit || '',
+        });
+      }
   }
 
   loadCategories() {

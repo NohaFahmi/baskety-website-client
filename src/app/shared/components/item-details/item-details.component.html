@@ -2,8 +2,8 @@
   <div class="item-details_header">
     <p-button [link]="true" icon="pi pi-arrow-left" (onClick)="backInView()"/>
     <span class="item-details_header-actions">
-      <p-button [link]="true" icon="pi pi-trash" />
-      <p-button [link]="true" icon="pi pi-pencil" />
+      <p-button [link]="true" icon="pi pi-trash" (onClick)="deleteItem(sideViewsService.itemDetails()?._id)"/>
+      <p-button [link]="true" icon="pi pi-pencil" (onClick)="navigateToEditItemView(sideViewsService.itemDetails()?._id)"/>
     </span>
   </div>
   <div class="item-details_wrapper">

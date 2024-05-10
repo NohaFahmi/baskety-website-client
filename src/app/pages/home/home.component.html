@@ -24,7 +24,7 @@
 
     <app-items-list-section *ngIf="!isLoading"
                             [itemBtnMode]="ITEM_CARD_MODES.ADD"
-                            [items]="itemsList"></app-items-list-section>
+                            [items]="itemService.groupedItems()"></app-items-list-section>
   </div>
 
 </div>

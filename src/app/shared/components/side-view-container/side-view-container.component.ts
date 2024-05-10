@@ -27,9 +27,11 @@ import {ShoppingListService} from "../../services/shopping-list/shopping-list.se
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideViewContainerComponent {
-  sidebarVisible = true;
   protected readonly SIDENAV_VIEWS = SIDENAV_VIEWS;
   constructor(public sideViewsService: SideViewsService,
               protected shoppingListService: ShoppingListService) {
+  }
+  navigateToEditItemView(itemId: string): void {
+    this.sideViewsService.navigateToEditItemView(itemId);
   }
 }

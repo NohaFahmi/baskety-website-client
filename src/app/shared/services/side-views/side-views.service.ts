@@ -13,11 +13,13 @@ export class SideViewsService {
   currentView = signal<SIDENAV_VIEWS>(SIDENAV_VIEWS.SHOPPING_LIST);
   itemDetails = signal<IItem | null>(null);
   isSideViewOpen = signal<boolean>(true);
+  isEditItemMode = signal<boolean>(false);
   constructor(private itemService: ItemService,
               private shoppingListService: ShoppingListService) { }
 
   updateCurrentSideView(view: SIDENAV_VIEWS): void {
     this.itemDetails.set(null);
+    this.isEditItemMode.set(false);
     this.shoppingListService.getCurrentShoppingList();
     this.currentView.set(view);
   }
@@ -28,6 +30,22 @@ export class SideViewsService {
       this.itemService.getItemById(itemId).then((details) => {
         this.currentView.set(SIDENAV_VIEWS.ITEM_DETAILS);
         this.itemDetails.set(details);
+        if (!this.isSideViewOpen()) {
+          this.toggleDisplaySideView();
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+
+  navigateToEditItemView(itemId: string): void {
+    if (itemId) {
+      this.shoppingListService.getCurrentShoppingList();
+      this.itemService.getItemById(itemId).then((details) => {
+        this.currentView.set(SIDENAV_VIEWS.ADD_EDIT_ITEM);
+        this.itemDetails.set(details);
+        this.isEditItemMode.set(true);
         if (!this.isSideViewOpen()) {
           this.toggleDisplaySideView();
         }

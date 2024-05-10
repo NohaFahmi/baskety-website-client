@@ -7,7 +7,8 @@
      <app-add-edit-item-form (onBackInView)="sideViewsService.updateCurrentSideView($event)"></app-add-edit-item-form>
    </ng-template>
    <ng-template [ngSwitchCase]="SIDENAV_VIEWS.ITEM_DETAILS">
-     <app-item-details (onBackInView)="sideViewsService.updateCurrentSideView($event)"></app-item-details>
+     <app-item-details (onBackInView)="sideViewsService.updateCurrentSideView($event)"
+     (onNavigateToEditView)="navigateToEditItemView($event)"></app-item-details>
    </ng-template>
  </ng-container>
 </div>
