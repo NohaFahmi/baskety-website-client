@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ChartModule} from "primeng/chart";
+import {StatsService} from "../../core/services/stats/stats.service";
+import {IStats} from "../../shared/interfaces/stats.interface";
 
 @Component({
   selector: 'app-stats',
@@ -10,39 +12,47 @@ import {ChartModule} from "primeng/chart";
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent {
   topItemsData: any;
   topCategoriesData: any;
   monthlySummaryData: any;
   barOptions: any;
   lineOptions: any;
+  statsInfo?: IStats;
+  constructor(private statsService: StatsService) {
+  }
 
   ngOnInit(): void {
+    this.loadStats();
+  }
+
+  setChartsConfigs(stats: IStats): void {
+    console.log(stats.topCategories.map((category) => category.category? category.category.name : 'test'))
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color-green');
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--mint-green-bg');
     this.topItemsData = {
-      labels: ['Banana', 'Rice', 'Chicken 1kg'],
+      labels: stats.topItems.map((item) => item.item.name),
       datasets: [
         {
           barThickness: 25,
           label: 'Top Items',
           backgroundColor: documentStyle.getPropertyValue('--soft-accent-color'),
           borderColor: documentStyle.getPropertyValue('--soft-accent-color'),
-          data: [65, 59, 80],
+          data: stats.topItems.map((item) => item.count),
         },
       ]
     };
     this.topCategoriesData = {
-      labels: ['Banana', 'Rice', 'Chicken 1kg'],
+      labels: stats.topCategories.map((category) => category.category && category.category?.name),
       datasets: [
         {
           barThickness: 25,
           label: 'Top Items',
           backgroundColor: documentStyle.getPropertyValue('--highlight-color'),
           borderColor: documentStyle.getPropertyValue('--highlight-color'),
-          data: [65, 59, 80],
+          data: stats.topCategories.map((category) => category.count),
         },
       ]
     };
@@ -126,6 +136,14 @@ export class StatsComponent implements OnInit {
         }
       }
     };
+  }
+  loadStats(): void {
+    this.statsService.getStats().then((stats) => {
+      this.statsInfo = stats;
+      this.setChartsConfigs(this.statsInfo);
+    }).catch((error) => {
+      console.log('ERROR', error);
+    })
   }
 
 }
