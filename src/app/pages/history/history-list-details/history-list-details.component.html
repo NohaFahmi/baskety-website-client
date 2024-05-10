@@ -1,14 +1,18 @@
-<div class="list-details">
+<div class="list-details" *ngIf="listDetails">
   <p-button icon="pi pi-arrow-left"
             [routerLink]="'/app/history'"
             [link]="true"
             label="back"></p-button>
-  <h3 class="page-title">Eero’s farewell party</h3>
+  <div class="title-wrapper">
+    <h3 class="page-title">{{listDetails.name}}</h3>
+    <app-list-status [status]="listDetails.status"></app-list-status>
+  </div>
   <div class="info-date">
             <i class="pi pi-calendar"></i>
-            <p>Mon 27.8.2020</p>
+            <p>{{listDetails.completedAt ?? listDetails.updatedAt | date: 'EEE mm.dd.yyyy'}}</p>
   </div>
-  <div class="list-details_content">
-    <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.VIEW"></app-items-list-section>
+  <div class="list-details_content" *ngIf="listDetails.items">
+    <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.VIEW" [inHome]="false"
+    [items]="listDetails.items"></app-items-list-section>
   </div>
 </div>

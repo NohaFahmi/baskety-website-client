@@ -6,8 +6,13 @@
       padding-right: 0;
     }
   }
+  .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .page-title {
-    margin: 20px auto;
+    margin: 20px 0;
   }
   .info-date {
     display: flex;
