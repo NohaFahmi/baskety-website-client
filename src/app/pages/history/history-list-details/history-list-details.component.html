@@ -9,7 +9,7 @@
   </div>
   <div class="info-date">
             <i class="pi pi-calendar"></i>
-            <p>{{listDetails.completedAt ?? listDetails.updatedAt | date: 'EEE mm.dd.yyyy'}}</p>
+            <p>{{listDetails.completedAt ?? listDetails.updatedAt | date: 'EEE dd.MM.yyyy'}}</p>
   </div>
   <div class="list-details_content" *ngIf="listDetails.items">
     <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.VIEW" [inHome]="false"

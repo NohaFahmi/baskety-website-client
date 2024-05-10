@@ -7,7 +7,7 @@
       <div class="list-card__info">
           <span class="list-card__info-date">
             <i class="pi pi-calendar"></i>
-            <p>{{list?.completedAt ?? list?.updatedAt | date: 'EEE mm.dd.yyyy'}}</p>
+            <p>{{list?.completedAt ?? list?.updatedAt | date: 'EEE dd.MM.yyyy'}}</p>
           </span>
         <span class="wrapper">
             <app-list-status [status]="list.status"></app-list-status>
