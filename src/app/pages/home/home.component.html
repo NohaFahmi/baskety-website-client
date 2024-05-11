@@ -1,13 +1,14 @@
 <div class="home-page">
   <div class="home-page_header">
     <h3 class="home-page_header_title"><span>Baskety</span> Your Lists, Sorted & Synced Everywhere.</h3>
-    <div class="home-page_header-search-bar">
-      <p-inputGroup>
-        <p-inputGroupAddon>
-          <i class="pi pi-search"></i>
-        </p-inputGroupAddon>
-        <input pInputText placeholder="Search" />
-      </p-inputGroup>
+<!--    TODO: add search to home-->
+<!--    <div class="home-page_header-search-bar">-->
+<!--      <p-inputGroup>-->
+<!--        <p-inputGroupAddon>-->
+<!--          <i class="pi pi-search"></i>-->
+<!--        </p-inputGroupAddon>-->
+<!--        <input pInputText placeholder="Search" />-->
+<!--      </p-inputGroup>-->
 <!--      <p-autoComplete [(ngModel)]="selectedCity" [group]="true" [suggestions]="filteredGroups" (completeMethod)="filterGroupedCity($event)" placeholder="Hint: type 'a'">-->
 <!--        <ng-template let-group pTemplate="group">-->
 <!--          <div class="flex align-items-center">-->
@@ -16,14 +17,10 @@
 <!--          </div>-->
 <!--        </ng-template>-->
 <!--      </p-autoComplete>-->
-    </div>
+<!--    </div>-->
   </div>
   <div class="home-page_content">
-    <p-progressSpinner ariaLabel="loading" animationDuration=".5s"
-                       *ngIf="isLoading"></p-progressSpinner>
-
-    <app-items-list-section *ngIf="!isLoading"
-                            [itemBtnMode]="ITEM_CARD_MODES.ADD"
+    <app-items-list-section [itemBtnMode]="ITEM_CARD_MODES.ADD"
                             [items]="itemService.groupedItems()"></app-items-list-section>
   </div>
 

@@ -10,6 +10,7 @@ import {ItemsListSectionComponent} from "../../shared/components/items-list-sect
 import {ItemService} from "../../core/services/item/item.service";
 import {IItem, IItemList} from "../../shared/interfaces/item.interface";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {LoadingService} from "../../shared/services/loading/loading.service";
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,6 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 })
 export class HomeComponent {
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
-  isLoading = false;
 
   constructor(protected itemService: ItemService) {
 
@@ -42,12 +42,10 @@ export class HomeComponent {
   }
 
   loadItemsList(): void {
-    this.isLoading = true;
     this.itemService.getAllItemsGroupedByCategories().then((items) => {
     }).catch((error) => {
       console.error(error);
     }).finally(() => {
-      this.isLoading = false;
     })
   }
 

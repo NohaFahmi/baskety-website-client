@@ -1,5 +1,5 @@
 import {HttpHandler, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
-import {AuthService} from "../services/auth/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {inject} from "@angular/core";
 import {Auth} from "@angular/fire/auth";
 import {from, Observable, switchMap} from "rxjs";

@@ -7,8 +7,9 @@ import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "./environments/environment";
 import {getAuth, provideAuth} from "@angular/fire/auth";
-import {httpInterceptor} from "./core/interceptors/http.interceptor";
+import {httpInterceptor} from "./core/interceptors/http/http.interceptor";
 import {provideAnimations} from "@angular/platform-browser/animations";
+import {loadingInterceptor} from "./core/interceptors/loading/loading.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
     }),
-    provideHttpClient(withInterceptors([httpInterceptor])),
+    provideHttpClient(withInterceptors([loadingInterceptor, httpInterceptor])),
     provideAnimations(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
