@@ -42,11 +42,7 @@ export class HomeComponent {
   }
 
   loadItemsList(): void {
-    this.itemService.getAllItemsGroupedByCategories().then((items) => {
-    }).catch((error) => {
-      console.error(error);
-    }).finally(() => {
-    })
+    this.itemService.getAllItemsGroupedByCategories();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, effect} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputGroupModule} from "primeng/inputgroup";
@@ -10,6 +10,8 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {AuthService} from "../../../core/services/auth/auth.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {emailPattern, getFormValidationErrors, passwordPattern} from "../../../shared/helpers/helpers";
+import {LoadingService} from "../../../shared/services/loading/loading.service";
+import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -29,8 +31,11 @@ import {emailPattern, getFormValidationErrors, passwordPattern} from "../../../s
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  isLoading: boolean = false;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private messageService: MessageService,
+              protected loadingService: LoadingService) {
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose(
         [Validators.required,
@@ -42,15 +47,19 @@ export class LoginComponent {
   }
 
   login(): void {
-    this.isLoading = true;
+    this.loadingService.setLoading(true);
     this.authService.loginWithEmail(this.loginForm.value).then((user) => {
       if (user) {
-        this.router.navigate(['/app'])
+        this.router.navigate(['/app']).then(() => {
+          this.loadingService.setLoading(false);
+          this.messageService.add({severity: 'info', summary: 'Welcome', detail: `Welcome back to Baskety App, ${user?.username ?? 'user'}!`})
+        })
       }
     }).catch((error) => {
-      console.log('ERROR', error);
+      const errorMessage = new Error(error).message;
+      this.messageService.add({severity: 'error', summary: 'Error', detail: errorMessage});
     }).finally(() => {
-      this.isLoading = false;
+      this.loadingService.setLoading(false);
     })
   }
 

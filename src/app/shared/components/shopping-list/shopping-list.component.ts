@@ -78,7 +78,7 @@ export class ShoppingListComponent {
         ...list,
         status: ShoppingListStatus.COMPLETED
       }
-      this.shoppingListService.updateShoppingList(updatedList);
+      this.shoppingListService.updateShoppingList(updatedList, 'COMPLETED');
       this.sideViewsService.toggleDisplaySideView();
     }
   }
@@ -88,7 +88,7 @@ export class ShoppingListComponent {
         ...list,
         status: ShoppingListStatus.CANCELLED
       }
-      this.shoppingListService.updateShoppingList(updatedList);
+      this.shoppingListService.updateShoppingList(updatedList, 'CANCELED');
       this.sideViewsService.toggleDisplaySideView();
     }
   }

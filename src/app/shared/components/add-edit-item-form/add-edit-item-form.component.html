@@ -63,6 +63,6 @@
     <p-button label="Submit"
               [loading]="isLoading"
               [disabled]="itemForm.invalid"
-              (click)="onItemCreation()"></p-button>
+              (click)="sideViewsService.isEditItemMode() ? onUpdateItem() : onItemCreation()"></p-button>
   </div>
 </div>

@@ -11,6 +11,7 @@ import {getFormValidationErrors} from "../../helpers/helpers";
 import {ItemService} from "../../../core/services/item/item.service";
 import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 import {SideViewsService} from "../../services/side-views/side-views.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-add-edit-item-form',
@@ -35,7 +36,9 @@ export class AddEditItemFormComponent{
 
   constructor(private categoriesService: CategoryService,
               private itemService: ItemService,
-              private fb: FormBuilder, protected sideViewsService: SideViewsService) {
+              private fb: FormBuilder,
+              private messageService: MessageService,
+              protected sideViewsService: SideViewsService) {
     this.itemForm = this.fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -82,12 +85,20 @@ export class AddEditItemFormComponent{
   //   this.httpService.post(`${driveUrl}?uploadType=multipart`, formData, { headers });
   // }
   onItemCreation(): void {
-    this.isLoading = true;
     this.itemService.createItem(this.itemForm.value).then((item) => {
       this.itemForm.reset();
-    }).catch((error) => {
-      console.log('erer', error);
-    }).finally(() => {this.isLoading = false});
+      this.messageService.add({severity: 'success', summary: 'Success',
+        detail: 'Item is created successfully!'});
+      this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
+    });
+  }
+  onUpdateItem(): void {
+    this.itemService.updateItem(this.itemForm.value).then((item) => {
+      this.itemForm.reset();
+      this.messageService.add({severity: 'success', summary: 'Success',
+        detail: 'Item is updated successfully!'});
+      this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
+    });
   }
 
   onCancel(): void {

@@ -33,8 +33,6 @@ export class SideViewsService {
         if (!this.isSideViewOpen()) {
           this.toggleDisplaySideView();
         }
-      }).catch((error) => {
-        console.log(error);
       });
     }
   }
@@ -49,9 +47,7 @@ export class SideViewsService {
         if (!this.isSideViewOpen()) {
           this.toggleDisplaySideView();
         }
-      }).catch((error) => {
-        console.log(error);
-      });
+      })
     }
   }
 

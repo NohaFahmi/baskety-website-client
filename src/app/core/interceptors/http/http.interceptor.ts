@@ -1,12 +1,21 @@
-import {HttpHandler, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpHandler, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
 import {AuthService} from "../../services/auth/auth.service";
 import {inject} from "@angular/core";
 import {Auth} from "@angular/fire/auth";
-import {from, Observable, switchMap} from "rxjs";
+import {catchError, from, Observable, switchMap, throwError} from "rxjs";
+import {MessageService} from "primeng/api";
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
+  const messageService = inject(MessageService);
   if (req.url.includes('api/v1/user') && req.method === 'POST') {
-    return next(req);
+    return next(req).pipe(
+      catchError((error) => {
+        if (error.status !== 200) {
+          messageService.add({ severity: 'success', summary: 'Success', detail: error.message });
+        }
+        return throwError(() => new Error(error));
+      })
+    )
   } else {
     const authService = inject(AuthService);
     const auth = inject(Auth);
@@ -18,8 +27,15 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
               Authorization: `Bearer ${idToken}`
             }
           });
-          return next(authReq);
-        })
+          return next(authReq).pipe(
+            catchError((error) => {
+              if (error.status !== 200) {
+                messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message });
+              }
+              return throwError(() => new Error(error));
+            })
+          )
+        }),
       );
     } else {
       return next(req);

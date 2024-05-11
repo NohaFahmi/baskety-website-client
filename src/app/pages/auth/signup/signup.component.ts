@@ -23,6 +23,9 @@ import {
 } from "../../../shared/helpers/helpers";
 import {AuthService} from "../../../core/services/auth/auth.service";
 import {UserService} from "../../../core/services/user/user.service";
+import {MessageService} from "primeng/api";
+import {LoadingService} from "../../../shared/services/loading/loading.service";
+import {ToastModule} from "primeng/toast";
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -35,43 +38,54 @@ import {UserService} from "../../../core/services/user/user.service";
     RippleModule,
     RouterLink,
     ReactiveFormsModule,
-    NgClass
+    NgClass,
+    ToastModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   signupForm: FormGroup;
-  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router, private userService: UserService) {
+              private router: Router,
+              private userService: UserService,
+              private messageService: MessageService,
+              protected loadingService: LoadingService) {
     this.signupForm = this.fb.group({
-      email: new FormControl('', Validators.compose(
+      email: new FormControl('test@gmail.com', Validators.compose(
         [Validators.required,
         Validators.pattern(emailPattern)])),
-      password: new FormControl('', Validators.compose(
+      password: new FormControl('Admin@1111', Validators.compose(
         [Validators.required, Validators.pattern(passwordPattern)]
       )),
-      confirmPassword: new FormControl('',
+      confirmPassword: new FormControl('Admin@1111',
         Validators.compose(
           [Validators.required, passwordsMatchValidator('password')]
         )),
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('Noha', [Validators.required]),
     })
   }
   onSignup(): void {
-    this.isLoading = true;
+    this.loadingService.setLoading(true);
     this.authService.emailSignup({
       email: this.signupForm.get('email')?.value,
       password: this.signupForm.get('password')?.value,
       displayName: this.signupForm.get('username')?.value
     }).then((data) => {
       if (data) {
-        this.router.navigate(['/app'])
+        this.router.navigate(['/app']).then(() => {
+          this.messageService.add({severity: 'info', summary: 'Welcome', detail: `Welcome to Baskety App, ${data.username}!`});
+        })
       }
-    }).finally(() => this.isLoading = false);
+    }).catch((error) => {
+     console.log(error);
+     const errorMessage  = new Error(error).message;
+      this.messageService.add({severity: 'error', summary: 'Error', detail: errorMessage});
+    }).finally(() => {
+      this.loadingService.setLoading(false);
+    });
   }
 
   protected readonly getFormValidationErrors = getFormValidationErrors;

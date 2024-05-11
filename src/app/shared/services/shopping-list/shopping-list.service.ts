@@ -3,6 +3,9 @@ import {ListService} from "../../../core/services/list/list.service";
 import {IItem} from "../../interfaces/item.interface";
 import {IList, IListReq, ShoppingListStatus} from "../../interfaces/list.interface";
 import {CategoryService} from "../../../core/services/category/category.service";
+import {MessageService} from "primeng/api";
+import {SideViewsService} from "../side-views/side-views.service";
+import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +14,15 @@ export class ShoppingListService {
   currentShoppingList = signal<IList | null>(null);
 
   constructor(private listService: ListService,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private messageService: MessageService) { }
 
   addItemToShoppingList(item: IItem): void {
     if (this.currentShoppingList() && this.currentShoppingList()?.items) {
       const currListItems = this.currentShoppingList()?.items ?? [];
       const currListItemsIds: Set<any> = new Set(currListItems.map((item) => item._id ?? ''));
       if(currListItemsIds.has(item._id)) {
-        console.log('item already added in list');
+        this.messageService.add({severity: 'error', summary: 'Error', detail: `${item.name} is already added into the current open list!`})
       } else {
         currListItemsIds.add(item._id ?? '');
         currListItems.push(item);
@@ -32,7 +36,6 @@ export class ShoppingListService {
         }
         this.updateShoppingList(updatedList);
       }
-
     } else {
       const items = [];
       items.push(item);
@@ -43,6 +46,7 @@ export class ShoppingListService {
       }
       this.listService.createList(list).then((list) => {
         this.currentShoppingList.set(list);
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'List is updated successfully!'})
       }).catch((error) => {
         this.currentShoppingList.set(null);
       });
@@ -80,11 +84,20 @@ export class ShoppingListService {
     }
   }
 
-  updateShoppingList(list: IList): void {
+  updateShoppingList(list: IList, updateCase?: any): void {
     this.listService.updateList(list._id ?? '', list).then((updatedList) => {
       this.getCurrentShoppingList();
-    }).catch((error) => {
-      console.log('error');
+      switch (updateCase) {
+        case 'COMPLETED':
+          this.messageService.add({severity: 'info', summary: 'Update', detail: `${list.name} is marked as completed!`})
+          break;
+        case 'CANCELED':
+          this.messageService.add({severity: 'info', summary: 'Update', detail: `${list.name} is canceled!`});
+          break;
+        default:
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'List is updated successfully!'})
+          break;
+      }
     });
   }
 
@@ -109,11 +122,7 @@ export class ShoppingListService {
           ...list,
           name: title
         }
-        this.listService.updateList(this.currentShoppingList()?._id ?? '', list).then((list) => {
-          this.getCurrentShoppingList();
-        }).catch((error) => {
-          console.log('error');
-        });
+        this.updateShoppingList(list);
       }
     }
   }

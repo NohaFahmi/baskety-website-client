@@ -20,7 +20,7 @@
         <small class="p-error">{{getFormValidationErrors(loginForm.get('password'))}}</small>
 
         <button pButton pRipple label="Login" class="submit-btn"
-                [loading]="isLoading"
+                [loading]="loadingService.getLoading()"
                 [disabled]="loginForm.invalid"
                 (click)="login()"></button>
       </form>

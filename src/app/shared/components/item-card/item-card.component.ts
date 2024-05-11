@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {IItem} from "../../interfaces/item.interface";
 import {SideViewsService} from "../../services/side-views/side-views.service";
 import {ShoppingListService} from "../../services/shopping-list/shopping-list.service";
+import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
 
 export enum ITEM_CARD_MODES {
   ADD = 'add',
@@ -51,6 +52,9 @@ export class ItemCardComponent {
     // add item to list
     if (item) {
       this.shoppingListService.addItemToShoppingList(item);
+      if (this.sideViewsService.currentView() !== SIDENAV_VIEWS.SHOPPING_LIST) {
+        this.sideViewsService.updateCurrentSideView(SIDENAV_VIEWS.SHOPPING_LIST);
+      }
     }
   }
 

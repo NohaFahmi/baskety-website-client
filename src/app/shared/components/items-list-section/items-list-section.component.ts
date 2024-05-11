@@ -19,5 +19,4 @@ export class ItemsListSectionComponent {
   @Input() items?: IItemList[];
   @Input() inHome: boolean = true;
   protected readonly ITEM_CARD_MODES = ITEM_CARD_MODES;
-  protected readonly Object = Object;
 }

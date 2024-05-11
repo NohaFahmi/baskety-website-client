@@ -8,10 +8,11 @@ import {
   signInWithPopup,
   signOut, user,
 } from '@angular/fire/auth';
-import {firstValueFrom, from, map, Observable, of, tap} from "rxjs";
+import {delay, firstValueFrom, from, map, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {IUser} from "../../../shared/interfaces/user.interface";
 import {UserService} from "../user/user.service";
+import {LoadingService} from "../../../shared/services/loading/loading.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class AuthService {
   constructor(private httpService: HttpService,
               private auth: Auth,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private loadingService: LoadingService) {
     this.user$ = new Observable(user => this.auth.onAuthStateChanged(user));
   }
 
@@ -65,9 +67,13 @@ export class AuthService {
   }
 
   logoutUser(): void {
+    this.loadingService.setLoading(true);
     signOut(this.auth).then(() => {
-      this.router.navigate(['/auth']);
-    })
+      setTimeout(() => {
+        this.loadingService.setLoading(false);
+        this.router.navigate(['/auth']);
+      }, 1500);
+    });
   }
 
   loginWithGoogle(): Promise<any> {
@@ -84,7 +90,6 @@ export class AuthService {
   isLoggedIn(): Observable<boolean> {
     return this.user$.pipe(
       tap((user: any) => {
-        console.log('USER', user);
         this.isSignedIn = !!user;
         if (this.isSignedIn) {
           this.userService.getUserFromDBByUid(user);

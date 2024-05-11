@@ -10,6 +10,7 @@ import {getAuth, provideAuth} from "@angular/fire/auth";
 import {httpInterceptor} from "./core/interceptors/http/http.interceptor";
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {loadingInterceptor} from "./core/interceptors/loading/loading.interceptor";
+import {MessageService} from "primeng/api";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,5 +25,6 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideAuth(() => getAuth()),
     ]),
+    MessageService
   ]
 };

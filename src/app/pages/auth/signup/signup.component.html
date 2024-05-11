@@ -35,7 +35,7 @@
         <button pButton pRipple label="Submit" class="submit-btn"
                 [disabled]="signupForm.invalid ||
                 signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value"
-                [loading]="isLoading"
+                [loading]="loadingService.getLoading()"
                 (click)="onSignup()"></button>
       </form>
     </div>
