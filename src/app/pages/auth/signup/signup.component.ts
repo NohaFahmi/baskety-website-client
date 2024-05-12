@@ -50,21 +50,20 @@ export class SignupComponent {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router,
-              private userService: UserService,
               private messageService: MessageService,
               protected loadingService: LoadingService) {
     this.signupForm = this.fb.group({
-      email: new FormControl('test@gmail.com', Validators.compose(
+      email: new FormControl('', Validators.compose(
         [Validators.required,
         Validators.pattern(emailPattern)])),
-      password: new FormControl('Admin@1111', Validators.compose(
+      password: new FormControl('', Validators.compose(
         [Validators.required, Validators.pattern(passwordPattern)]
       )),
-      confirmPassword: new FormControl('Admin@1111',
+      confirmPassword: new FormControl('',
         Validators.compose(
           [Validators.required, passwordsMatchValidator('password')]
         )),
-      username: new FormControl('Noha', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
     })
   }
   onSignup(): void {
