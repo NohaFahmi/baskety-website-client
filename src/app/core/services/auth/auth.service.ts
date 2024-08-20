@@ -28,16 +28,18 @@ export class AuthService {
     this.user$ = new Observable(user => this.auth.onAuthStateChanged(user));
   }
 
-  emailSignup(signupInfo: any): Promise<any> {
+  emailSignup(signupInfo: IUser): Promise<any> {
+    const { photoURL, username } = signupInfo;
     return new Promise((resolve, reject) => {
-      createUserWithEmailAndPassword(this.auth, signupInfo.email, signupInfo.password).then((data: any) => {
+      createUserWithEmailAndPassword(this.auth, signupInfo.email, signupInfo.password ?? '').then((data: any) => {
         if (data) {
+          const {email, uid, emailVerified} = data.user;
           const newUser:IUser = {
-            email: data.user.email,
-            username: data.user.displayName,
-            emailVerified: data.user.emailVerified,
-            uid: data.user.uid,
-            photoURL: data.user.photoURL
+            email,
+            username,
+            emailVerified,
+            uid,
+            photoURL
           }
           this.userService.saveUserInDB(newUser).then(() => {
             this.saveAccessToken(data?.user?.accessToken);
@@ -90,9 +92,13 @@ export class AuthService {
   isLoggedIn(): Observable<boolean> {
     return this.user$.pipe(
       tap((user: any) => {
+        console.log('USER', user);
         this.isSignedIn = !!user;
+        console.log('isSignedIn', this.isSignedIn);
         if (this.isSignedIn) {
-          this.userService.getUserFromDBByUid(user);
+          this.userService.getUserFromDBByUid().then((data) => {
+            console.log('data', data);
+          })
         }
       return !!user;
     }));
