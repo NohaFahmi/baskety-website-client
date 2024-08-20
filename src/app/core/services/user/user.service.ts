@@ -11,13 +11,17 @@ export class UserService {
   constructor(private httpService: HttpService) { }
 
   saveUserInDB(userInfo: IUser): Promise<IUser> {
-    return firstValueFrom(this.httpService.post('user', userInfo));
+    return firstValueFrom(this.httpService.post('users', userInfo));
   }
 
-  getUserFromDBByUid(user: IUser): Promise<any> {
-    return firstValueFrom(this.httpService.get(`user/byUid/${user.uid}`));
+  getUserFromDBByUid(): Promise<any> {
+    return firstValueFrom(this.httpService.get(`users/byUid`));
   }
-  updateUserInDB(userId: string, userInfo: IUser): Promise<any> {
-    return firstValueFrom(this.httpService.put(`user/${userId}`, userInfo));
+  updateUserInDB(userInfo: IUser): Promise<any> {
+    return firstValueFrom(this.httpService.put(`users}`, userInfo));
+  }
+
+  deleteUserFromDB(): Promise<any> {
+    return firstValueFrom(this.httpService.delete(`users`));
   }
 }

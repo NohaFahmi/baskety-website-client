@@ -92,13 +92,9 @@ export class AuthService {
   isLoggedIn(): Observable<boolean> {
     return this.user$.pipe(
       tap((user: any) => {
-        console.log('USER', user);
         this.isSignedIn = !!user;
-        console.log('isSignedIn', this.isSignedIn);
         if (this.isSignedIn) {
-          this.userService.getUserFromDBByUid().then((data) => {
-            console.log('data', data);
-          })
+          this.userService.getUserFromDBByUid();
         }
       return !!user;
     }));

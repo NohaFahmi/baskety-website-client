@@ -10,5 +10,6 @@ export const environment = {
     appId: "1:208494348969:web:a2a2feb508b1858f5477b8",
     measurementId: "G-XT6Q200LD4"
   },
-  apiURL: 'https://baskety-dev-api.vercel.app/api/v1/'
+  apiURL: 'http://localhost:4000/api/v1/'
+  // apiURL: 'https://baskety-dev-api.vercel.app/api/v1/'
 }

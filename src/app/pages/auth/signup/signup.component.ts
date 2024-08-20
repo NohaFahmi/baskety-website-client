@@ -71,7 +71,7 @@ export class SignupComponent {
     this.authService.emailSignup({
       email: this.signupForm.get('email')?.value,
       password: this.signupForm.get('password')?.value,
-      displayName: this.signupForm.get('username')?.value
+      username: this.signupForm.get('username')?.value
     }).then((data) => {
       if (data) {
         this.router.navigate(['/app']).then(() => {

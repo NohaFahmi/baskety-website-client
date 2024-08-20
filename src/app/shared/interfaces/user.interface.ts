@@ -1,7 +1,8 @@
 export interface IUser {
-  uid: string;
+  uid?: string;
   email: string;
   username: string;
-  photoURL: string;
-  emailVerified: boolean;
+  photoURL?: string;
+  emailVerified?: boolean;
+  password?: string;
 }
