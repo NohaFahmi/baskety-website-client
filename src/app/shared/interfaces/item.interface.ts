@@ -1,13 +1,15 @@
 export interface IItem {
-  _id?: string;
+  id?: number;
   name: string;
   description: string;
-  imageURL?: string;
+  imgUrl?: string;
   price: number;
-  quantity: number;
+  qtyUnit: string;
   category?: string;
-  quantityUnit:string;
-  categoryId?: string;
+  // quantityUnit:string;
+  categoryId?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IItemList {

@@ -56,9 +56,9 @@ export class AddEditItemFormComponent{
           name: this.sideViewsService.itemDetails()?.name || '',
           description: this.sideViewsService.itemDetails()?.description || '',
           price: this.sideViewsService.itemDetails()?.price || '',
-          quantity: this.sideViewsService.itemDetails()?.quantity || '',
+          // quantity: this.sideViewsService.itemDetails()?.quantity || '',
           categoryId: this.sideViewsService.itemDetails()?.categoryId || '',
-          quantityUnit: this.sideViewsService.itemDetails()?.quantityUnit || '',
+          // quantityUnit: this.sideViewsService.itemDetails()?.quantityUnit || '',
         });
       }
   }
@@ -89,7 +89,7 @@ export class AddEditItemFormComponent{
       this.itemForm.reset();
       this.messageService.add({severity: 'success', summary: 'Success',
         detail: 'Item is created successfully!'});
-      this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
+      // this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
     });
   }
   onUpdateItem(): void {
@@ -97,7 +97,7 @@ export class AddEditItemFormComponent{
       this.itemForm.reset();
       this.messageService.add({severity: 'success', summary: 'Success',
         detail: 'Item is updated successfully!'});
-      this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
+      // this.sideViewsService.navigateToItemDetailsView(item._id ?? '');
     });
   }
 

@@ -20,11 +20,11 @@ export class ShoppingListService {
   addItemToShoppingList(item: IItem): void {
     if (this.currentShoppingList() && this.currentShoppingList()?.items) {
       const currListItems = this.currentShoppingList()?.items ?? [];
-      const currListItemsIds: Set<any> = new Set(currListItems.map((item) => item._id ?? ''));
-      if(currListItemsIds.has(item._id)) {
+      const currListItemsIds: Set<any> = new Set(currListItems.map((item) => item.id ?? ''));
+      if(currListItemsIds.has(item.id)) {
         this.messageService.add({severity: 'error', summary: 'Error', detail: `${item.name} is already added into the current open list!`})
       } else {
-        currListItemsIds.add(item._id ?? '');
+        currListItemsIds.add(item.id ?? '');
         currListItems.push(item);
         const updatedList: IListReq = {
           items: currListItems,
@@ -55,7 +55,7 @@ export class ShoppingListService {
 
   removeItemFromShoppingList(item: IItem): void {
     const currListItems = this.currentShoppingList()?.items ?? [];
-    const updatedListItems = currListItems.filter((currItem) => currItem._id !== item._id);
+    const updatedListItems = currListItems.filter((currItem) => currItem._id !== item.id);
     const updatedList: IListReq = {
       items: updatedListItems,
       _id: this.currentShoppingList()?._id,
@@ -69,7 +69,7 @@ export class ShoppingListService {
 
   updateItemInShoppingList(item: IItem): void {
     const currListItems = this.currentShoppingList()?.items ?? [];
-    const updatedItemIndex = currListItems.findIndex((currItem) => currItem._id === item._id);
+    const updatedItemIndex = currListItems.findIndex((currItem) => currItem._id === item.id);
     if (updatedItemIndex !== -1) {
       currListItems[updatedItemIndex] = item;
       const updatedList: IListReq = {

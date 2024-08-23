@@ -41,11 +41,12 @@ export class ItemDetailsComponent {
   }
 
   getItemCategoryName(categoryId?: string): string | undefined {
-    if (this.categoryService.categoriesList().length > 0) {
-      return this.categoryService.categoriesList().find((category) => category._id === categoryId)?.name;
-    } else {
-      return '';
-    }
+    // if (this.categoryService.categoriesList().length > 0) {
+    //   return this.categoryService.categoriesList().find((category) => category._id === categoryId)?.name;
+    // } else {
+    //   return '';
+    // }
+    return 's'
   }
 
   backInView(): void {
@@ -58,10 +59,10 @@ export class ItemDetailsComponent {
     if(!isItemAddedIntoCurrList) {
       this.itemService.deleteItem(itemId??'').then(() => {
         this.onBackInView.emit(SIDENAV_VIEWS.SHOPPING_LIST);
-        this.itemService.getAllItemsGroupedByCategories().finally(() => {
-          this.messageService.add({severity: 'success', summary: 'Success',
-            detail: 'Item is deleted successfully!'});
-        });
+        // this.itemService.getAllItemsGroupedByCategories().finally(() => {
+        //   this.messageService.add({severity: 'success', summary: 'Success',
+        //     detail: 'Item is deleted successfully!'});
+        // });
       });
     } else {
       this.messageService.add({severity: 'error', summary: 'Error',

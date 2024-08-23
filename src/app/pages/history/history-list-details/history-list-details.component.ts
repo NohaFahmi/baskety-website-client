@@ -53,16 +53,18 @@ export class HistoryListDetailsComponent {
   }
 
   getCategoryNameById(id: string): string {
-    if (this.categoryService.categoriesList()) {
-      const category = this.categoryService.categoriesList().find((category) => category._id === id);
-      return category?.name || '';
-    }
+    // if (this.categoryService.categoriesList()) {
+      // const category = this.categoryService.categoriesList().find((category) => category._id === id);
+      // return category?.name || '';
+      // return '';
+    // }
     return '';
   }
   groupListItemsByCategoryId(items: IItem[]): any {
     const grouped: {categoryName: string; items: IItem[]}[] = [];
     items.forEach((item) => {
-      const categoryName = this.getCategoryNameById(item.categoryId ?? '');
+      // const categoryName = this.getCategoryNameById(item.categoryId ?? '');
+      const categoryName = '';
       let existingGroup = grouped.find((g) => g.categoryName === categoryName);
       if (existingGroup) {
         existingGroup.items.push(item);

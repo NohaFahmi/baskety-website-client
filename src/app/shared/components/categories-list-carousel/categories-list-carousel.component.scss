@@ -1,0 +1,9 @@
+::ng-deep {
+  .category-item {
+    min-width: 130px;
+    width: fit-content;
+    height: 40px;
+    //margin-right: 10px;
+    cursor: pointer;
+  }
+}

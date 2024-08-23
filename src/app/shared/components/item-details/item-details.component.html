@@ -2,12 +2,12 @@
   <div class="item-details_header">
     <p-button [link]="true" icon="pi pi-arrow-left" (onClick)="backInView()"/>
     <span class="item-details_header-actions">
-      <p-button [link]="true" icon="pi pi-trash" (onClick)="deleteItem(sideViewsService.itemDetails()?._id)"/>
-      <p-button [link]="true" icon="pi pi-pencil" (onClick)="navigateToEditItemView(sideViewsService.itemDetails()?._id)"/>
+      <p-button [link]="true" icon="pi pi-trash" />
+      <p-button [link]="true" icon="pi pi-pencil" />
     </span>
   </div>
   <div class="item-details_wrapper">
-    <img [ngSrc]="sideViewsService.itemDetails()?.imageURL ?? 'assets/images/shopping-list-illustration.png'"
+    <img [ngSrc]="sideViewsService.itemDetails()?.imgUrl ?? 'assets/images/shopping-list-illustration.png'"
          width="1024" height="1024" alt="item-img"/>
     <div class="item-info">
       <p class="item-info-label">
@@ -19,7 +19,7 @@
       <p class="item-info-label">
         category
       </p>
-      <p class="item-info-value">{{getItemCategoryName(sideViewsService.itemDetails()?.categoryId)}}</p>
+<!--      <p class="item-info-value">{{getItemCategoryName(sideViewsService.itemDetails()?.categoryId)}}</p>-->
     </div>
     <div class="item-info">
       <p class="item-info-label">

@@ -1,0 +1,14 @@
+@if (categories) {
+  <p-carousel
+    [value]="categories"
+    [numVisible]="5"
+    [showIndicators]="false"
+    [circular]="true"
+    [numScroll]="2">
+    <ng-template let-category pTemplate="item">
+      <p-tag styleClass="category-item"
+        [value]="category.name" (click)="onCategoryClicked(category)"/>
+    </ng-template>
+  </p-carousel>
+
+}

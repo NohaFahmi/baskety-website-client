@@ -8,22 +8,8 @@ import {IItem} from "../../../shared/interfaces/item.interface";
   providedIn: 'root'
 })
 export class CategoryService {
-  categoriesList = signal<ICategory[]>([]);
   constructor(private httpService: HttpService) { }
   gatAllCategories(): Promise<ICategory[]> {
-    return new Promise((resolve, reject) => {
-      if (this.categoriesList().length > 0) {
-        resolve(this.categoriesList());
-      } else {
-        lastValueFrom(this.httpService.get('category')).then((categories) => {
-          this.categoriesList.set(categories);
-          resolve(categories);
-        }).catch((error) => {
-          this.categoriesList.set([]);
-          reject(error);
-        });
-      }
-
-    });
+    return lastValueFrom(this.httpService.get('categories'))
   }
 }

@@ -12,17 +12,20 @@ export class ItemService {
   constructor(private httpService: HttpService) { }
 
   getAllItems(): Promise<IItem[]> {
-    return lastValueFrom(this.httpService.get('item'))
+    return lastValueFrom(this.httpService.get('items'))
   }
-  getAllItemsGroupedByCategories(): Promise<IItemList[]> {
-    return new Promise((resolve, reject) => {
-      lastValueFrom(this.httpService.get('item/grouped')).then((groupedItems) => {
-        this.groupedItems.set(groupedItems);
-        resolve(groupedItems);
-      }).catch((error) => {
-        reject(error);
-      })
-    })
+  // getAllItemsGroupedByCategories(): Promise<IItemList[]> {
+  //   return new Promise((resolve, reject) => {
+  //     lastValueFrom(this.httpService.get('item/grouped')).then((groupedItems) => {
+  //       this.groupedItems.set(groupedItems);
+  //       resolve(groupedItems);
+  //     }).catch((error) => {
+  //       reject(error);
+  //     })
+  //   })
+  // }
+  getAllItemsByCategoryId(categoryId: number): Promise<IItem[]> {
+    return lastValueFrom(this.httpService.get(`items/byCategory/${categoryId}`))
   }
   getItemById(itemId: string): Promise<IItem> {
     return lastValueFrom(this.httpService.get(`item/${itemId}`))
@@ -33,7 +36,7 @@ export class ItemService {
   }
 
   updateItem(item: IItem): Promise<IItem> {
-    return lastValueFrom(this.httpService.put(`item/${item._id}`, item));
+    return lastValueFrom(this.httpService.put(`item/${item.id}`, item));
   }
   deleteItem(itemId: string): Promise<IItem> {
     return lastValueFrom(this.httpService.delete(`item/${itemId}`));

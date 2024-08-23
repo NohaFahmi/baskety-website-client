@@ -60,20 +60,20 @@ export class ItemCardComponent {
 
   updateItemCountOnList(item?: IItem, increase?: boolean) {
     // update count
-    if (item) {
-      let quantity = item?.quantity ?? 1;
-      if (increase) {
-        quantity += 1;
-      } else {
-        quantity -= 1;
-      }
-      let updatedItem = item;
-      updatedItem = {
-        ...updatedItem,
-        quantity: quantity
-      }
-      this.updateItemQuantity.emit(updatedItem)
-    }
+    // if (item) {
+    //   let quantity = item?.quantity ?? 1;
+    //   if (increase) {
+    //     quantity += 1;
+    //   } else {
+    //     quantity -= 1;
+    //   }
+    //   let updatedItem = item;
+    //   updatedItem = {
+    //     ...updatedItem,
+    //     quantity: quantity
+    //   }
+    //   this.updateItemQuantity.emit(updatedItem)
+    // }
   }
 
   removeItemFromList(item?: IItem) {

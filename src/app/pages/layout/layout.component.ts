@@ -31,6 +31,6 @@ export class LayoutComponent implements OnInit {
               public sideViewsService: SideViewsService) {
   }
   ngOnInit() {
-    this.shoppingListService.getCurrentShoppingList();
+    // this.shoppingListService.getCurrentShoppingList();
   }
 }
