@@ -1,9 +1,10 @@
 ::ng-deep {
+  .p-carousel-items-container {
+    gap: 5px;
+  }
   .category-item {
-    min-width: 130px;
-    width: fit-content;
     height: 40px;
-    //margin-right: 10px;
-    cursor: pointer;
+    width: fit-content;
+    min-width: 150px;
   }
 }

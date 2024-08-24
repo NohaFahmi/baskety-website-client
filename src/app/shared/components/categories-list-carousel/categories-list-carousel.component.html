@@ -1,13 +1,15 @@
 @if (categories) {
+  <h4 class="pl-7 mb-4">{{ title }}</h4>
   <p-carousel
     [value]="categories"
-    [numVisible]="5"
+    [numVisible]="3"
     [showIndicators]="false"
     [circular]="true"
     [numScroll]="2">
     <ng-template let-category pTemplate="item">
-      <p-tag styleClass="category-item"
-        [value]="category.name" (click)="onCategoryClicked(category)"/>
+      <p-tag styleClass="category-item cursor-pointer"
+             [value]="category.name"
+             (click)="onCategoryClicked(category)"/>
     </ng-template>
   </p-carousel>
 

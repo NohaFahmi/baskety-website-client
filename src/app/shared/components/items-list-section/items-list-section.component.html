@@ -1,13 +1,14 @@
-<div class="items-list-section">
+<div class="items-list-section pl-7 mt-7 flex gap-3 w-full flex-wrap">
   @for (item of items; track item.id) {
-    <div class="items-list-section__item">
-      <img class="items-list-section__item-img" [ngSrc]="item.imgUrl ?? ''" fill="fill" [alt]="item.name"/>
-      <span class="items-list-section__item-content">
-        <p class="items-list-section__item-name">{{item.name}}</p>
-        <p-button icon="pi pi-plus"
-                  styleClass="items-list-section__item-add-btn"/>
-      </span>
-    </div>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+    <app-item-card [item]="item"/>
+  } @empty {
+    <h4>No Items in this category</h4>
   }
 <!--  <div class="items-category" *ngFor="let category of items;">-->
 <!--    <h4 class="category-title">{{inHome ? category.categoryName[0] : category.categoryName}}</h4>-->

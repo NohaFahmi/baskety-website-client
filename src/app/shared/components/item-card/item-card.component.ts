@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
 import {CheckboxModule} from "primeng/checkbox";
 import {FormsModule} from "@angular/forms";
 import {IItem} from "../../interfaces/item.interface";
 import {SideViewsService} from "../../services/side-views/side-views.service";
 import {ShoppingListService} from "../../services/shopping-list/shopping-list.service";
 import {SIDENAV_VIEWS} from "../../interfaces/common.interface";
+import {ButtonModule} from "primeng/button";
 
 export enum ITEM_CARD_MODES {
   ADD = 'add',
@@ -21,7 +22,9 @@ export enum ITEM_CARD_MODES {
     NgSwitch,
     NgSwitchCase,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    ButtonModule,
+    NgOptimizedImage
   ],
   templateUrl: './item-card.component.html',
   styleUrl: './item-card.component.scss'

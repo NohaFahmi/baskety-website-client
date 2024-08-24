@@ -15,6 +15,7 @@ import {TagModule} from "primeng/tag";
 })
 export class CategoriesListCarouselComponent {
   @Input() categories?: ICategory[];
+  @Input() title?: string;
   @Output() categoryClicked: EventEmitter<ICategory> = new EventEmitter();
 
   onCategoryClicked(category: ICategory) {

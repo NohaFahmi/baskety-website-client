@@ -1,39 +1,48 @@
-<div class="item-card" [ngClass]="{'in-list': mode === ITEM_CARD_MODES.EDIT}">
-<!--  <p-checkbox -->
-<!--    [(ngModel)]="checked"-->
-<!--              inputId="itemCard"-->
-<!--              id="itemCard"></p-checkbox>-->
-<!-- <label for="itemCard">-->
-   <p class="item-card_name">
-     <span>{{item?.name}}</span>
-   </p>
-   <ng-container [ngSwitch]="mode">
-     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.ADD">
-       <button class="add-item-btn btn-icon" (click)="onAddingItemToList(item)">
-         <i class="pi pi-plus"></i>
-       </button>
-     </ng-template>
-     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.VIEW">
-       <p class="item-card_count">
-<!--         {{item?.quantity}} {{item?.quantityUnit}}-->
-       </p>
-     </ng-template>
-     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.EDIT">
-       <button class="item-card_count-btn" [ngClass]="{'extended':  isCountExtended}">
-         <span class="remove-item" *ngIf="isCountExtended" (click)="removeItemFromList(item)">
-           <i class="pi pi-trash"></i>
-         </span>
-         <span class="decrease-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item)">
-          <i class="pi pi-minus"></i>
-        </span>
-<!--        <span class="item-count" (click)="onEditItemCount()">{{item?.quantity}} pcs</span>-->
-        <span class="increase-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item, true)">
-          <i class="pi pi-plus"></i>
-        </span>
-       </button>
-     </ng-template>
-   </ng-container>
-<!-- </label>-->
+<!--<div class="item-card" [ngClass]="{'in-list': mode === ITEM_CARD_MODES.EDIT}">-->
+<!--&lt;!&ndash;  <p-checkbox &ndash;&gt;-->
+<!--&lt;!&ndash;    [(ngModel)]="checked"&ndash;&gt;-->
+<!--&lt;!&ndash;              inputId="itemCard"&ndash;&gt;-->
+<!--&lt;!&ndash;              id="itemCard"></p-checkbox>&ndash;&gt;-->
+<!--&lt;!&ndash; <label for="itemCard">&ndash;&gt;-->
+<!--   <p class="item-card_name">-->
+<!--     <span>{{item?.name}}</span>-->
+<!--   </p>-->
+<!--   <ng-container [ngSwitch]="mode">-->
+<!--     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.ADD">-->
+<!--       <button class="add-item-btn btn-icon" (click)="onAddingItemToList(item)">-->
+<!--         <i class="pi pi-plus"></i>-->
+<!--       </button>-->
+<!--     </ng-template>-->
+<!--     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.VIEW">-->
+<!--       <p class="item-card_count">-->
+<!--&lt;!&ndash;         {{item?.quantity}} {{item?.quantityUnit}}&ndash;&gt;-->
+<!--       </p>-->
+<!--     </ng-template>-->
+<!--     <ng-template [ngSwitchCase]="ITEM_CARD_MODES.EDIT">-->
+<!--       <button class="item-card_count-btn" [ngClass]="{'extended':  isCountExtended}">-->
+<!--         <span class="remove-item" *ngIf="isCountExtended" (click)="removeItemFromList(item)">-->
+<!--           <i class="pi pi-trash"></i>-->
+<!--         </span>-->
+<!--         <span class="decrease-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item)">-->
+<!--          <i class="pi pi-minus"></i>-->
+<!--        </span>-->
+<!--&lt;!&ndash;        <span class="item-count" (click)="onEditItemCount()">{{item?.quantity}} pcs</span>&ndash;&gt;-->
+<!--        <span class="increase-count" *ngIf="isCountExtended" (click)="updateItemCountOnList(item, true)">-->
+<!--          <i class="pi pi-plus"></i>-->
+<!--        </span>-->
+<!--       </button>-->
+<!--     </ng-template>-->
+<!--   </ng-container>-->
+<!--&lt;!&ndash; </label>&ndash;&gt;-->
 
 
+<!--</div>-->
+<div class="item-card
+     flex gap-4 align-items-center bg-white shadow-2
+      px-3 py-1 border-round-md">
+  <p-button icon="pi pi-plus"
+            styleClass="border-circle w-2rem h-2rem"/>
+  <p class="item-card_name text-md">{{item?.name}}</p>
+  <img class="item-card_img" [ngSrc]="item?.imgUrl ?? ''"
+       fill="fill" [alt]="item?.name"/>
 </div>
