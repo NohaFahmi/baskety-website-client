@@ -5,7 +5,7 @@
   overflow-y: auto;
   height: 100%;
   position: relative;
-  background-color: var(--surface-c);
+  background-color: var(--cold-blue-bg);
   .app-side-navigation-container {
     width: 90px;
     height: 100vh;
@@ -31,22 +31,22 @@
   }
   .app-right-view-container {
     border: 1px solid #355259;
-    width: 400px;
-    position: fixed;
-    top: 0;
-    transition: all 1s ease-in-out;
-    bottom: 0;
-    z-index: 2;
-    right: -100%;
-    background-color: var(--bg-color);
-    &.visible {
-      right: 0;
-      @media(max-width: 1200px) {
-        display:  block;
-      }
-    }
-    @media(max-width: 1200px) {
-      display: none;
-    }
+    width: 600px;
+    //position: fixed;
+    //top: 0;
+    //transition: all 1s ease-in-out;
+    //bottom: 0;
+    //z-index: 2;
+    //right: -100%;
+    background-color: var(--white-bg);
+    //&.visible {
+    //  right: 0;
+    //  @media(max-width: 1200px) {
+    //    display:  block;
+    //  }
+    //}
+    //@media(max-width: 1200px) {
+    //  display: none;
+    //}
   }
 }

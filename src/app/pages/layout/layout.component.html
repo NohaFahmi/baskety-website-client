@@ -5,7 +5,7 @@
   <div class="app-content-container">
     <router-outlet></router-outlet>
   </div>
-  <div class="app-right-view-container"
+  <div class="app-right-view-container border-round-left-xl shadow-2 border-none h-screen"
        [ngClass]="{'visible': sideViewsService.isSideViewOpen()}">
     <app-side-view-container></app-side-view-container>
   </div>
