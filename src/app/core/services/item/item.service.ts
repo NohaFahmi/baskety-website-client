@@ -12,11 +12,14 @@ export class ItemService {
   constructor(private httpService: HttpService) { }
 
   getAllItems(): Promise<IItem[]> {
-    return lastValueFrom(this.httpService.get('item'))
+    return lastValueFrom(this.httpService.get('items'))
+  }
+  getAllItemsByCategoryId(id: number): Promise<IItem[]> {
+    return lastValueFrom(this.httpService.get(`items/byCategory/${id}`))
   }
   getAllItemsGroupedByCategories(): Promise<IItemList[]> {
     return new Promise((resolve, reject) => {
-      lastValueFrom(this.httpService.get('item/grouped')).then((groupedItems) => {
+      lastValueFrom(this.httpService.get('items/grouped')).then((groupedItems) => {
         this.groupedItems.set(groupedItems);
         resolve(groupedItems);
       }).catch((error) => {
@@ -33,7 +36,7 @@ export class ItemService {
   }
 
   updateItem(item: IItem): Promise<IItem> {
-    return lastValueFrom(this.httpService.put(`item/${item._id}`, item));
+    return lastValueFrom(this.httpService.put(`item/`, item));
   }
   deleteItem(itemId: string): Promise<IItem> {
     return lastValueFrom(this.httpService.delete(`item/${itemId}`));

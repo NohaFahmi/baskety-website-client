@@ -1,0 +1,13 @@
+.item-card {
+  ::ng-deep {
+    .item-card_add-btn {
+      background: black;
+      height: 25px;
+      width: 25px;
+      color: lightcyan;
+      .pi {
+        font-size: 10px;
+      }
+    }
+  }
+}
