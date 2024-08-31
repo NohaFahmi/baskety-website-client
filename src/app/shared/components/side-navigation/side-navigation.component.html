@@ -1,37 +1,42 @@
-<div class="side-navigation">
-  <div class="side-navigation_logo">
-    <img ngSrc="assets/images/app-logo.png" width="1024" height="1024" alt="app-logo">
-  </div>
-  <div class="side-navigation_links">
-    <div class="link-item">
-<!--      <span class="active-border"></span>-->
-      <p-button icon="pi pi-list"
-                [link]="true"
-                pTooltip="home"
-                [routerLink]="'/app/home'"></p-button>
+<p-sidebar [visible]="true" [dismissible]="false" [modal]="false"
+           [showCloseIcon]="false" styleClass="w-5rem side-navigation shadow-none">
+  <ng-template pTemplate="headless">
+    <div class="w-full h-auto side-navigation__header p-1 bg-transparent">
+      <img ngSrc="assets/images/logo-1.jpeg" alt="logo" width="1024" height="1024" class="w-full h-full"/>
     </div>
-    <div class="link-item">
-<!--      <span class="active-border"></span>-->
-      <p-button icon="pi pi-history"
-                [link]="true"
-                pTooltip="history"
-                [routerLink]="'/app/history'"></p-button>
+    <div class="side-navigation__content bg-transparent h-full flex flex flex-column align-items-center justify-content-center">
+      <ul class="side-navigation__menu-list list-none py-0 px-2 m-0 w-full">
+        <li>
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+            <i class="pi pi-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+            <i class="pi pi-chart-pie"></i>
+            <span>stats</span>
+          </a>
+        </li>
+        <li>
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+            <i class="pi pi-history"></i>
+            <span>History</span>
+          </a>
+        </li>
+        <li>
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+            <i class="pi pi-wrench"></i>
+            <span>Admin</span>
+          </a>
+        </li>
+      </ul>
+      <div class="side-navigation__user-actions flex flex-column align-items-center justify-content-center gap-3">
+        <p-avatar
+          [label]="userInfo()?.username?.charAt(0)"
+          size="large" />
+        <p-button icon="pi pi-sign-out" [raised]="true" [text]="true" styleClass="shadow-none p-0 w-full mt-4" (onClick)="onLogout()"/>
+      </div>
     </div>
-    <div class="link-item">
-<!--      <span class="active-border"></span>-->
-      <p-button icon="pi pi-chart-bar"
-                [link]="true"
-                pTooltip="stats"
-                [routerLink]="'/app/stats'"></p-button>
-    </div>
-  </div>
-  <div class="side-navigation_actions-btn">
-    <button class="btn-icon list-btn"
-            (click)="openSideView()">
-      <i class="pi pi-shopping-cart text-3xl"></i>
-    </button>
-    <button class="btn-icon logout-btn" (click)="onLogout()">
-      <i class="pi pi-sign-out text-3xl"></i>
-    </button>
-  </div>
-</div>
+  </ng-template>
+</p-sidebar>

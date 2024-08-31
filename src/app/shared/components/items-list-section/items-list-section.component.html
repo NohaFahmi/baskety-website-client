@@ -1,9 +1,0 @@
-<div class="items-list-section">
-  <div class="items-category" *ngFor="let category of items;">
-    <h4 class="category-title">{{inHome ? category.categoryName[0] : category.categoryName}}</h4>
-    <div class="category-items-list" [ngClass]="{'in-list': itemBtnMode === ITEM_CARD_MODES.EDIT}">
-      <app-item-card *ngFor="let item of category.items"
-      [mode]="itemBtnMode" [item]="item"></app-item-card>
-    </div>
-  </div>
-</div>

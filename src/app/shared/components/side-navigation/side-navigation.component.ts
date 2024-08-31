@@ -1,37 +1,30 @@
-import {Component, EventEmitter, Output, signal} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
+import {SidebarModule} from "primeng/sidebar";
 import {NgOptimizedImage} from "@angular/common";
+import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {TooltipModule} from "primeng/tooltip";
-import {BadgeModule} from "primeng/badge";
+import {toSignal} from "@angular/core/rxjs-interop";
 import {AuthService} from "../../../core/services/auth/auth.service";
-import {SideViewsService} from "../../services/side-views/side-views.service";
+import {from} from "rxjs";
+import {IUser} from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-side-navigation',
   standalone: true,
   imports: [
+    SidebarModule,
     NgOptimizedImage,
-    ButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    TooltipModule,
-    BadgeModule
+    AvatarModule,
+    ButtonModule
   ],
   templateUrl: './side-navigation.component.html',
   styleUrl: './side-navigation.component.scss'
 })
 export class SideNavigationComponent {
+  private authService = inject(AuthService);
+  userInfo = toSignal<IUser | null>(from(this.authService.userInfo$));
 
-  constructor(private authService: AuthService,
-              public sideViewsService: SideViewsService) {
-  }
-
-  onLogout(): void {
+  onLogout() {
     this.authService.logoutUser();
-  }
-
-  openSideView(): void {
-    this.sideViewsService.toggleDisplaySideView();
   }
 }

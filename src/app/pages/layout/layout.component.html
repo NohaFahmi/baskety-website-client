@@ -1,12 +1,9 @@
-<div class="page-container">
-  <div class="app-side-navigation-container">
-    <app-side-navigation></app-side-navigation>
+<div class="layout-wrapper flex gap-2">
+  <div class="layout-wrapper__side-menu h-screen w-5rem fixed top-0 bottom-0 left-0">
+    <app-side-navigation/>
   </div>
-  <div class="app-content-container">
-    <router-outlet></router-outlet>
+  <div class="layout-wrapper__content min-h-screen h-full">
+    <p-button (onClick)="toggleSideNavigation()" icon="pi pi-plus" />
   </div>
-  <div class="app-right-view-container"
-       [ngClass]="{'visible': sideViewsService.isSideViewOpen()}">
-    <app-side-view-container></app-side-view-container>
-  </div>
+  <div class="layout-wrapper__side-shopping-list w-20rem h-screen border-solid fixed top-0 bottom-0 right-0"></div>
 </div>

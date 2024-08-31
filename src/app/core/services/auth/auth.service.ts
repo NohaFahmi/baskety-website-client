@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   signOut, user,
 } from '@angular/fire/auth';
-import {delay, firstValueFrom, from, map, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, delay, firstValueFrom, from, map, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {IUser} from "../../../shared/interfaces/user.interface";
 import {UserService} from "../user/user.service";
@@ -19,6 +19,7 @@ import {LoadingService} from "../../../shared/services/loading/loading.service";
 })
 export class AuthService {
   user$: Observable<any | null>;
+  userInfo$ = new BehaviorSubject<IUser | null>(null);
   isSignedIn: boolean = false;
   constructor(private httpService: HttpService,
               private auth: Auth,
@@ -92,7 +93,9 @@ export class AuthService {
       tap((user: any) => {
         this.isSignedIn = !!user;
         if (this.isSignedIn) {
-          this.userService.getUserFromDBByUid(user);
+          this.userService.getUserFromDBByUid(user).then((user) => {
+            this.userInfo$.next(user);
+          });
         }
       return !!user;
     }));
