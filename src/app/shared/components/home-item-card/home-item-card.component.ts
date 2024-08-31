@@ -14,7 +14,7 @@ import {IItem} from "../../interfaces/item.interface";
   styleUrl: './home-item-card.component.scss'
 })
 export class HomeItemCardComponent {
-  @Input() item: IItem;
+  @Input() item?: IItem;
   addItemToList(item: IItem) {
     // TODO: update this logic
   }

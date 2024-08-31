@@ -84,8 +84,4 @@ export class HomeComponent {
     this.selectedCategoryId.set(id);
     this.loadItemsListInCategory(this.selectedCategoryId() as number);
   }
-
-  addItemToList(item: IItem) {
-    // TODO: update this logic
-  }
 }

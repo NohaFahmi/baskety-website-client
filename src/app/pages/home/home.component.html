@@ -10,20 +10,22 @@
   </div>
 
   <div class="home-page__content pt-8">
-    <div class="home-page__categories-list">
-      <h3 class="mb-3 pl-1">Explore categories</h3>
-     <p-carousel [value]="categoriesList() ?? []"
-                 [numVisible]="6"
-                 [numScroll]="3"
-                 [circular]="false"
-                 [showIndicators]="false"
-     [responsiveOptions]="responsiveOptions">
-       <ng-template let-category pTemplate="item">
-         <app-home-category-card [category]="category" (onCategorySelected)="onSelectCategoryItem($event)"/>
-       </ng-template>
+    @if(categoriesList()) {
+      <div class="home-page__categories-list">
+        <h3 class="mb-3 pl-1">Explore categories</h3>
+        <p-carousel [value]="categoriesList() ?? []"
+                    [numVisible]="6"
+                    [numScroll]="3"
+                    [circular]="false"
+                    [showIndicators]="false"
+                    [responsiveOptions]="responsiveOptions">
+          <ng-template let-category pTemplate="item">
+            <app-home-category-card [category]="category" (onCategorySelected)="onSelectCategoryItem($event)"/>
+          </ng-template>
 
-     </p-carousel>
-    </div>
+        </p-carousel>
+      </div>
+    }
     <div class="home-page__items-list mt-8 flex gap-4 px-1 flex-wrap">
       @for(item of itemsList(); track item.id) {
         <app-home-item-card [item]="item"/>
