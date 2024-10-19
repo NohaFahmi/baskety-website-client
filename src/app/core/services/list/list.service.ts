@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "../http/http.service";
-import {lastValueFrom} from "rxjs";
-import {IList, IListReq} from "../../../shared/interfaces/list.interface";
+import {firstValueFrom, lastValueFrom} from "rxjs";
+import {IList, IListReq, ShoppingListStatus} from "../../../shared/interfaces/list.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +9,25 @@ import {IList, IListReq} from "../../../shared/interfaces/list.interface";
 export class ListService {
   constructor(private httpService: HttpService) { }
   getUserListsHistory(): Promise<IList[]> {
-    return lastValueFrom(this.httpService.get('list/history'))
+    return firstValueFrom(this.httpService.get('lists/history'))
   }
-  getCurrentOpenList(): Promise<IList> {
-    return lastValueFrom(this.httpService.get('list/current'))
+  getCurrentOpenList(): Promise<{list:IList}> {
+    return firstValueFrom(this.httpService.get('lists/current'))
   }
-  getListDetailsById(listId: string): Promise<IList> {
-    return lastValueFrom(this.httpService.get(`list/${listId}`))
+  getListDetailsById(listId: number): Promise<IList> {
+    return firstValueFrom(this.httpService.get(`lists/${listId}`))
   }
-  createList(list: IListReq): Promise<IList> {
-    return lastValueFrom(this.httpService.post('list', list));
+  createList(list: IList): Promise<IList> {
+    return firstValueFrom(this.httpService.post('lists/create', list));
   }
   updateList(listId: string, list: IListReq): Promise<any> {
       return lastValueFrom(this.httpService.put(`list/${listId}`, list));
   }
-  deleteList(listId: string): Promise<IList> {
-      return lastValueFrom(this.httpService.delete(`list/${listId}`));
+  updateListStatus(listId: number, listStatus: ShoppingListStatus): Promise<any> {
+      return firstValueFrom(this.httpService.put(`lists/status/update/${listId}`, listStatus));
+  }
+  deleteList(listId: number): Promise<IList> {
+      return firstValueFrom(this.httpService.delete(`lists/${listId}`));
   }
 
 }

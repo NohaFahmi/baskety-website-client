@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpService} from "../http/http.service";
 import {
   Auth,
@@ -13,11 +13,13 @@ import {Router} from "@angular/router";
 import {IUser} from "../../../shared/interfaces/user.interface";
 import {UserService} from "../user/user.service";
 import {LoadingService} from "../../../shared/services/loading/loading.service";
+import {ListService} from "../list/list.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  listService = inject(ListService);
   user$: Observable<any | null>;
   userInfo$ = new BehaviorSubject<IUser | null>(null);
   isSignedIn: boolean = false;
@@ -95,6 +97,9 @@ export class AuthService {
         if (this.isSignedIn) {
           this.userService.getUserFromDBByUid(user).then((user) => {
             this.userInfo$.next(user);
+            this.listService.getCurrentOpenList().then((data: any) => {
+              console.log('data', data);
+            })
           });
         }
       return !!user;
