@@ -1,0 +1,33 @@
+@if (listItem) {
+  <div class="shopping-list-item-card flex gap-2 p-2 bg-white shadow-1">
+    <img class="shopping-list-item-card_img" [src]="'assets/images/item.svg'" alt="{{listItem.name}}"/>
+    <div class="flex gap-3 w-full flex-column">
+      <div class="shopping-list-item-card_info-wrapper flex flex-column gap-1">
+        <span class="shopping-list-item-card_name text-md font-bold">Bread</span>
+        <span class="shopping-list-item-card_qty text-sm">2 pc</span>
+        <span class="shopping-list-item-card_price text-sm">
+        100
+      </span>
+      </div>
+      <div class="shopping-list-item-card_action flex gap-2 justify-content-end align-items-center">
+        <p-inputNumber
+          class="qty-control-btn"
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="horizontal"
+          spinnerMode="horizontal"
+          inputStyleClass="p-1 shadow-none border-round text-center"
+          [step]="1"
+          [size]="1"
+          decrementButtonClass="p-1 bg-transparent text-color-secondary border-none"
+          incrementButtonClass="p-1 bg-transparent text-color-secondary border-none"
+          incrementButtonIcon="pi pi-plus text-sm"
+          decrementButtonIcon="pi pi-minus text-sm"/>
+        <p-button icon="pi pi-trash" styleClass="p-0 h-fit w-fit delete-btn shadow-none"
+                  [rounded]="true" [text]="true" />
+      </div>
+
+    </div>
+  </div>
+
+}

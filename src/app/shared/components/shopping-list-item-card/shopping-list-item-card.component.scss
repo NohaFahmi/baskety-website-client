@@ -1,0 +1,20 @@
+.shopping-list-item-card {
+  border-radius: 5px;
+  &_img {
+    width: 70px;
+    height: 70px;
+  }
+  &_name, &_qty, &_price {
+    color: var(--text-blue);
+  }
+  ::ng-deep {
+    .delete-btn {
+      color: var(--subtle-color);
+    }
+  }
+  .qty-control-btn {
+    ::ng-deep.p-inputtext {
+      border-color: var(--subtle-color);
+    }
+  }
+}

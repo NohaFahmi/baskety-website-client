@@ -1,0 +1,9 @@
+<div class="shopping-list__container">
+  <h3 class="text-center shopping-list__name mb-5">{{currentList()?.list?.name}}</h3>
+  <div class="shopping-list__items flex flex-column py-2 px-1 gap-3 overflow-y-auto">
+    @for(item of currentList()?.list?.items; track item.id) {
+      <app-shopping-list-item-card [listItem]="item"/>
+    }
+
+  </div>
+</div>

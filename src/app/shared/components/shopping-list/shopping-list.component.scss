@@ -1,0 +1,27 @@
+.shopping-list {
+  &__name {
+  }
+  &__items {
+    height: 85vh;
+  }
+
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--mint-green-bg);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mint-green-bg);
+}
