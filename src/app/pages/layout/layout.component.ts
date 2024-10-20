@@ -7,6 +7,7 @@ import {UserService} from "../../core/services/user/user.service";
 import {AuthService} from "../../core/services/auth/auth.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {from} from "rxjs";
+import {ShoppingListComponent} from "../../shared/components/shopping-list/shopping-list.component";
 
 @Component({
   selector: 'app-layout',
@@ -17,6 +18,7 @@ import {from} from "rxjs";
     NgIf,
     ButtonModule,
     SideNavigationComponent,
+    ShoppingListComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'

@@ -1,12 +1,24 @@
 .side-navigation {
   &__content {}
+  &__user-actions {
+    ::ng-deep {
+      .logout-btn {
+        color: var(--mint-green);
+      }
+    }
+  }
   &__menu-list {
     li {
       margin-bottom: 40px;
       padding: 10px;
       border-radius: 10px;
-      &:hover {
-        background: #add8e66e;
+      a {
+        span, i {
+          color: var(--text-blue);
+        }
+      }
+      &:hover, &.active {
+        background: var(--light-blue);
       }
     }
   }

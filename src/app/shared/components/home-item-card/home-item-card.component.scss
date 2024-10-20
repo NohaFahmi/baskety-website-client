@@ -1,10 +1,15 @@
 .item-card {
+  &_name {
+    color: var(--text-blue);
+  }
   ::ng-deep {
+
     .item-card_add-btn {
-      background: black;
+      background: var(--light-pink);
       height: 25px;
       width: 25px;
-      color: lightcyan;
+      color: var(--bg-color);
+
       .pi {
         font-size: 10px;
       }

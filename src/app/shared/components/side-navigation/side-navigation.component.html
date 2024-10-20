@@ -6,26 +6,26 @@
     </div>
     <div class="side-navigation__content bg-transparent h-full flex flex flex-column align-items-center justify-content-center">
       <ul class="side-navigation__menu-list list-none py-0 px-2 m-0 w-full">
-        <li>
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+        <li [class.active]="activeRoute().includes('home')">
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'home'">
             <i class="pi pi-home"></i>
             <span>Home</span>
           </a>
         </li>
-        <li>
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+        <li [class.active]="activeRoute().includes('stats')">
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'stats'">
             <i class="pi pi-chart-pie"></i>
             <span>stats</span>
           </a>
         </li>
-        <li>
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+        <li [class.active]="activeRoute().includes('history')" >
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'stats'">
             <i class="pi pi-history"></i>
             <span>History</span>
           </a>
         </li>
-        <li>
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm">
+        <li [class.active]="activeRoute().includes('admin')">
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline"  [routerLink]="'stats'">
             <i class="pi pi-wrench"></i>
             <span>Admin</span>
           </a>
@@ -35,7 +35,8 @@
         <p-avatar
           [label]="userInfo()?.username?.charAt(0)"
           size="large" />
-        <p-button icon="pi pi-sign-out" [raised]="true" [text]="true" styleClass="shadow-none p-0 w-full mt-4" (onClick)="onLogout()"/>
+        <p-button icon="pi pi-sign-out" [raised]="true" [text]="true" styleClass="shadow-none p-0 w-full mt-4 logout-btn"
+                  (onClick)="onLogout()"/>
       </div>
     </div>
   </ng-template>

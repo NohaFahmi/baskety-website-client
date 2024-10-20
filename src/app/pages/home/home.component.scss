@@ -1,28 +1,14 @@
-//.home-page {
-//  &_header {
-//    display: flex;
-//    width: 100%;
-//    justify-content: space-between;
-//    align-items: center;
-//    gap: 20px;
-//    flex-wrap: wrap;
-//    color: var(--text-color-green);
-//    padding: 50px 0 30px;
-//    &_title {
-//      font-weight: 500;
-//      width: 80%;
-//      max-width: 340px;
-//      span {
-//        font-size: 24px;
-//        color: var(--primary-color);
-//        font-weight: bolder;
-//      }
-//    }
-//  }
-//}
 .home-page {
-  padding: 20px;
-
+  padding: 20px 40px;
+  &__categories-list {
+    border-radius: 10px;
+    h3, p {
+      padding-left: 40px;
+    }
+    p {
+      color: var(--subtle-color);
+    }
+  }
   ::ng-deep {
     .p-inputgroup {
       justify-content: flex-end;

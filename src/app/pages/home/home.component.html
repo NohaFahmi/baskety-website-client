@@ -1,20 +1,15 @@
 <div class="home-page">
   <div class="home-page__header flex align-items-center justify-content-between flex-wrap">
     <h2 class="w-fit">Listify</h2>
-    <p-inputGroup styleClass="w-20rem search-input">
-      <p-inputGroupAddon styleClass="bg-transparent">
-        <i class="pi pi-search"></i>
-      </p-inputGroupAddon>
-      <input pInputText placeholder="Search for items" />
-    </p-inputGroup>
   </div>
 
-  <div class="home-page__content pt-8">
+  <div class="home-page__content pt-4">
     @if(categoriesList()) {
-      <div class="home-page__categories-list">
-        <h3 class="mb-3 pl-1">Explore categories</h3>
+      <div class="home-page__categories-list shadow-1 bg-white p-4">
+        <h3 class="mb-2">Explore categories</h3>
+        <p class="mb-4 text-sm">Select your favourite category to explore items</p>
         <p-carousel [value]="categoriesList() ?? []"
-                    [numVisible]="6"
+                    [numVisible]="4"
                     [numScroll]="3"
                     [circular]="false"
                     [showIndicators]="false"
@@ -26,10 +21,18 @@
         </p-carousel>
       </div>
     }
-    <div class="home-page__items-list mt-8 flex gap-4 px-1 flex-wrap">
-      @for(item of itemsList(); track item.id) {
-        <app-home-item-card [item]="item"/>
-      }
+    <div class="home-page__items-wrapper mt-6 flex flex-column gap-5">
+      <p-inputGroup styleClass="w-20rem search-input">
+        <input pInputText placeholder="Search for items" />
+        <p-inputGroupAddon styleClass="bg-transparent">
+          <i class="pi pi-search"></i>
+        </p-inputGroupAddon>
+      </p-inputGroup>
+      <div class="home-page__items-list flex gap-4 px-1 flex-wrap">
+        @for(item of itemsList(); track item.id) {
+          <app-home-item-card [item]="item"/>
+        }
+      </div>
     </div>
   </div>
 </div>
