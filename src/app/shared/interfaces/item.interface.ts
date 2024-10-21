@@ -1,16 +1,22 @@
 export interface IItem {
   id?: number;
   name: string;
-  description: string;
-  imageURL?: string;
-  price: number;
-  quantity: number;
-  category?: string;
-  quantityUnit:string;
-  categoryId?: string;
+  description?: string;
+  imgUrl?: string;
+  price?: number;
+  qtyUnit?: string;
+  updatedAt?: string;
+  createdAt?: string;
+  categoryId?: number;
 }
 
-export interface IItemList {
-  categoryName: string[];
-  items: IItem[]
+export interface IListItem {
+  itemId: number;
+  qty: number,
+  listId: number;
+  id: number;
+  price: number;
+  qtyUnit: string;
+  imgUrl: string;
+  name?:string;
 }
