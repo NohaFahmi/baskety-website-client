@@ -17,17 +17,16 @@
           <ng-template let-category pTemplate="item">
             <app-home-category-card [category]="category" (onCategorySelected)="onSelectCategoryItem($event)"/>
           </ng-template>
-
         </p-carousel>
       </div>
     }
     <div class="home-page__items-wrapper mt-6 flex flex-column gap-5">
-      <p-inputGroup styleClass="w-20rem search-input">
-        <input pInputText placeholder="Search for items" />
-        <p-inputGroupAddon styleClass="bg-transparent">
-          <i class="pi pi-search"></i>
-        </p-inputGroupAddon>
-      </p-inputGroup>
+<!--      <p-inputGroup styleClass="w-20rem search-input">-->
+<!--        <input pInputText placeholder="Search for items" />-->
+<!--        <p-inputGroupAddon styleClass="bg-transparent">-->
+<!--          <i class="pi pi-search"></i>-->
+<!--        </p-inputGroupAddon>-->
+<!--      </p-inputGroup>-->
       <div class="home-page__items-list flex gap-4 px-1 flex-wrap">
         @for(item of itemsList(); track item.id) {
           <app-home-item-card [item]="item"/>

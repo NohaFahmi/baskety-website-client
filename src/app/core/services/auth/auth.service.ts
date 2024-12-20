@@ -37,10 +37,10 @@ export class AuthService {
         if (data) {
           const newUser:IUser = {
             email: data.user.email,
-            username: data.user.displayName,
+            username: signupInfo.displayName,
             emailVerified: data.user.emailVerified,
             uid: data.user.uid,
-            photoURL: data.user.photoURL
+            photoUrl: data.user.photoURL
           }
           this.userService.saveUserInDB(newUser).then(() => {
             this.saveAccessToken(data?.user?.accessToken);
