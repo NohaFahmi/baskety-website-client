@@ -11,7 +11,7 @@ export interface IItem {
 }
 
 export interface IListItem {
-  itemId: number;
+  listItemId: number;
   qty: number,
   listId: number;
   id: number;

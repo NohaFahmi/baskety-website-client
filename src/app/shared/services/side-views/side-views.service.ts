@@ -20,13 +20,13 @@ export class SideViewsService {
   updateCurrentSideView(view: SIDENAV_VIEWS): void {
     this.itemDetails.set(null);
     this.isEditItemMode.set(false);
-    this.shoppingListService.getCurrentShoppingList();
+    // this.shoppingListService.getCurrentShoppingList();
     this.currentView.set(view);
   }
 
   navigateToItemDetailsView(itemId: string): void {
     if (itemId) {
-      this.shoppingListService.getCurrentShoppingList();
+      // this.shoppingListService.getCurrentShoppingList();
       this.itemService.getItemById(itemId).then((details) => {
         this.currentView.set(SIDENAV_VIEWS.ITEM_DETAILS);
         this.itemDetails.set(details);
@@ -39,7 +39,7 @@ export class SideViewsService {
 
   navigateToEditItemView(itemId: string): void {
     if (itemId) {
-      this.shoppingListService.getCurrentShoppingList();
+      // this.shoppingListService.getCurrentShoppingList();
       this.itemService.getItemById(itemId).then((details) => {
         this.currentView.set(SIDENAV_VIEWS.ADD_EDIT_ITEM);
         this.itemDetails.set(details);
@@ -54,7 +54,7 @@ export class SideViewsService {
   toggleDisplaySideView(): void {
     this.isSideViewOpen.update((val) => !val);
     if(this.isSideViewOpen()) {
-      this.shoppingListService.getCurrentShoppingList();
+      // this.shoppingListService.getCurrentShoppingList();
     }
   }
 

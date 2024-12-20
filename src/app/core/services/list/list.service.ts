@@ -20,8 +20,8 @@ export class ListService {
   createList(list: IList): Promise<IList> {
     return firstValueFrom(this.httpService.post('lists/create', list));
   }
-  updateList(listId: string, list: IListReq): Promise<any> {
-      return lastValueFrom(this.httpService.put(`list/${listId}`, list));
+  updateList(listId: number, list: IListReq): Promise<any> {
+      return lastValueFrom(this.httpService.put(`lists/update/${listId}`, list));
   }
   updateListStatus(listId: number, listStatus: ShoppingListStatus): Promise<any> {
       return firstValueFrom(this.httpService.put(`lists/status/update/${listId}`, listStatus));
