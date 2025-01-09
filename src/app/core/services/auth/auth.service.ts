@@ -14,20 +14,23 @@ import {IUser} from "../../../shared/interfaces/user.interface";
 import {UserService} from "../user/user.service";
 import {LoadingService} from "../../../shared/services/loading/loading.service";
 import {ListService} from "../list/list.service";
+import {IList} from "../../../shared/interfaces/list.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  listService = inject(ListService);
+  private listService = inject(ListService);
+  private httpService = inject(HttpService);
+  private auth = inject(Auth);
+  private router = inject(Router);
+  private userService = inject(UserService);
+  private loadingService = inject(LoadingService);
+
   user$: Observable<any | null>;
   userInfo$ = new BehaviorSubject<IUser | null>(null);
   isSignedIn: boolean = false;
-  constructor(private httpService: HttpService,
-              private auth: Auth,
-              private router: Router,
-              private userService: UserService,
-              private loadingService: LoadingService) {
+  constructor() {
     this.user$ = new Observable(user => this.auth.onAuthStateChanged(user));
   }
 
@@ -97,9 +100,7 @@ export class AuthService {
         if (this.isSignedIn) {
           this.userService.getUserFromDBByUid(user).then((user) => {
             this.userInfo$.next(user);
-            this.listService.getCurrentOpenList().then((data: any) => {
-              console.log('data', data);
-            })
+            this.listService.getCurrentOpenList().then((data: any) => {});
           });
         }
       return !!user;
