@@ -44,6 +44,7 @@ export class ListService {
       })
     })
   }
+
   updateList(listId: number, list: ICreateListReq): Promise<any> {
     return new Promise((resolve, reject) => {
       firstValueFrom(this.httpService.put(`lists/update/${listId}`, list)).then(({list}) => {
@@ -54,6 +55,7 @@ export class ListService {
       })
     })
   }
+
   updateListStatus(listId: number, listStatus: ShoppingListStatus): Promise<any> {
     return new Promise((resolve, reject) => {
       firstValueFrom(this.httpService.put(`lists/status/update/${listId}`, {
@@ -66,6 +68,7 @@ export class ListService {
       })
     });
   }
+
   deleteList(listId: number): Promise<IList> {
       return firstValueFrom(this.httpService.delete(`lists/${listId}`));
   }
