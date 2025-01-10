@@ -1,9 +1,43 @@
-<div class="shopping-list__container">
-  <h3 class="text-center shopping-list__name mb-5">{{currentList()?.list?.name}}</h3>
-  <div class="shopping-list__items flex flex-column py-2 px-1 gap-3 overflow-y-auto">
-    @for(item of currentList()?.list?.items; track item.id) {
-      <app-shopping-list-item-card [listItem]="item"/>
+<div class="shopping-list__container h-full">
+  @if (currentOpenShoppingList() !== null && currentOpenShoppingList(); as list) {
+     @if(list.id) {
+       <div class="shopping-list__header flex gap-2 align-items-center mb-3">
+         @if(list.name) {
+           @if (editMode()) {
+             <input type="text" pInputText [(ngModel)]="list.name" />
+           } @else {
+             <h3 class="text-center shopping-list__name"> {{ list.name }}</h3>
+           }
+<!--           <p-button [icon]="editMode() ? 'pi pi-save' : 'pi pi-pencil'"-->
+<!--                     styleClass="h-fil w-fit p-0 border-none bg-transparent"-->
+<!--                     [text]="true" severity="secondary" (click)="onEditList()"/>-->
+         }
+       </div>
+       <div class="shopping-list__items flex flex-column py-2 px-1 gap-3 overflow-y-auto">
+         @for (item of list.items; track item.id) {
+           <app-shopping-list-item-card [listItem]="item" (updateListItem)="updateList($event)"
+                                        (deleteListItem)="deleteItemFromList($event)"/>
+         } @empty {
+           <p class="text-center text-color-secondary">No items in the list</p>}
+       </div>
+       <div class="mt-5 flex flex-column gap-3">
+         @if(list.totalCost > 0) {
+           <p class="shopping-list__cost m-0 align-self-center text-lg font-bold">Total Cost: {{list.totalCost}} EGP</p>
+         }
+         <div class="shopping-list-actions flex justify-content-center align-items-center gap-5">
+           <p-button
+             label="Cancel"
+             [text]="true"
+             severity="secondary"
+             (click)="onCancelList()"
+           ></p-button>
+           <p-button
+             label="Complete"
+             severity="info"
+             (click)="onCompleteList()"
+           />
+         </div>
+       </div>
+     }
     }
-
-  </div>
 </div>

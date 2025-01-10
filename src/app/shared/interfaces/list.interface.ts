@@ -1,4 +1,4 @@
-import {IItem, IListItem} from "./item.interface";
+import {IItem, IListItem, INewItem} from "./item.interface";
 
 export enum ShoppingListStatus {
   CANCELED = 'cancelled',
@@ -6,13 +6,13 @@ export enum ShoppingListStatus {
   OPEN = 'open',
 }
 export interface IList {
-  id?: number;
-  name?: string;
-  status?: ShoppingListStatus;
-  completedAt?: Date;
-  userId?: string;
-  items?: IListItem[];
-  updatedAt?: string;
+  id: number;
+  name: string;
+  status: ShoppingListStatus;
+  completedAt: Date;
+  userId: string;
+  items: IListItem[];
+  updatedAt: string;
   totalCost: number;
 }
 export interface IListReq {
@@ -23,4 +23,10 @@ export interface IListReq {
   userId?: string;
   items?: IListItem[];
 }
+
+export interface ICreateListReq {
+  name: string;
+  items: INewItem[];
+}
+
 

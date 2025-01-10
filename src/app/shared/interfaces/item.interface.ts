@@ -10,13 +10,17 @@ export interface IItem {
   categoryId?: number;
 }
 
-export interface IListItem {
-  listItemId: number;
+export interface IListItem extends IItem{
+  listItemId?: number;
   qty: number,
-  listId: number;
+  listId?: number;
   id: number;
   price: number;
   qtyUnit: string;
   imgUrl: string;
-  name?:string;
+}
+
+export interface INewItem {
+  itemId: number;
+  qty: number;
 }

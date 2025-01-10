@@ -1,8 +1,11 @@
 .layout-wrapper {
   background-color: #F7FAFC;
   &__content {
-    width: calc(100vw - 430px);
     margin-left: 5rem;
+    width: 100%;
+    &.with-list-open {
+      width: calc(100vw - 430px);
+    }
   }
   &__side-shopping-list {
   }

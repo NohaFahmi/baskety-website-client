@@ -8,6 +8,7 @@ import {AuthService} from "../../core/services/auth/auth.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {from} from "rxjs";
 import {ShoppingListComponent} from "../../shared/components/shopping-list/shopping-list.component";
+import {ListService} from "../../core/services/list/list.service";
 
 @Component({
   selector: 'app-layout',
@@ -24,7 +25,10 @@ import {ShoppingListComponent} from "../../shared/components/shopping-list/shopp
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
+  private shoppingListService = inject(ListService);
+  currentOpenShoppingList = toSignal(from(this.shoppingListService.currentOpenShoppingList));
   openSideNavigation = signal<boolean>(false);
+
   toggleSideNavigation() {
     this.openSideNavigation.set(!this.openSideNavigation());
   }

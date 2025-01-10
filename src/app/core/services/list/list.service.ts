@@ -1,30 +1,70 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpService} from "../http/http.service";
-import {firstValueFrom, lastValueFrom} from "rxjs";
-import {IList, IListReq, ShoppingListStatus} from "../../../shared/interfaces/list.interface";
+import {BehaviorSubject, firstValueFrom} from "rxjs";
+import {ICreateListReq, IList, ShoppingListStatus} from "../../../shared/interfaces/list.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
-  constructor(private httpService: HttpService) { }
+  private httpService = inject(HttpService);
+  currentOpenShoppingList = new BehaviorSubject<IList | null>(null);
+
   getUserListsHistory(): Promise<IList[]> {
     return firstValueFrom(this.httpService.get('lists/history'))
   }
-  getCurrentOpenList(): Promise<{list:IList}> {
-    return firstValueFrom(this.httpService.get('lists/current'))
+
+  getCurrentOpenList(): Promise<IList | null> {
+    return new Promise((resolve, reject) => {
+      firstValueFrom(this.httpService.get('lists/current')).then(({list}) => {
+        if(list.id) {
+          this.currentOpenShoppingList.next(list);
+          resolve(list)
+        } else {
+          this.currentOpenShoppingList.next(null);
+          resolve(null)
+        }
+      }).catch((error) => {
+        reject(error)
+      })
+    })
   }
+
   getListDetailsById(listId: number): Promise<IList> {
     return firstValueFrom(this.httpService.get(`lists/${listId}`))
   }
-  createList(list: IList): Promise<IList> {
-    return firstValueFrom(this.httpService.post('lists/create', list));
+
+  createList(list: ICreateListReq): Promise<IList> {
+    return new Promise((resolve, reject) => {
+      firstValueFrom(this.httpService.post('lists/create', list)).then(({list}) => {
+        this.currentOpenShoppingList.next(list);
+        resolve(list.list)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
   }
-  updateList(listId: number, list: IListReq): Promise<any> {
-      return lastValueFrom(this.httpService.put(`lists/update/${listId}`, list));
+  updateList(listId: number, list: ICreateListReq): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firstValueFrom(this.httpService.put(`lists/update/${listId}`, list)).then(({list}) => {
+        this.currentOpenShoppingList.next(list);
+        resolve(list.list)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
   }
   updateListStatus(listId: number, listStatus: ShoppingListStatus): Promise<any> {
-      return firstValueFrom(this.httpService.put(`lists/status/update/${listId}`, listStatus));
+    return new Promise((resolve, reject) => {
+      firstValueFrom(this.httpService.put(`lists/status/update/${listId}`, {
+        status: listStatus
+      })).then((list) => {
+        this.currentOpenShoppingList.next(null)
+        resolve({list})
+      }).catch((error) => {
+        reject(error)
+      })
+    });
   }
   deleteList(listId: number): Promise<IList> {
       return firstValueFrom(this.httpService.delete(`lists/${listId}`));
