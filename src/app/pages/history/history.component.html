@@ -1,6 +1,6 @@
 <div class="history-page p-4">
   <h3 class="page-title mb-6 mt-3">Shopping Lists History</h3>
-  <div class="lists-groups-by-date flex flex-column gap-4 mt-3">
+  <div class="lists-groups-by-date flex flex-column gap-4 mt-3 w-10">
     @for(list of userListsHistory(); track list.id) {
       <app-history-list-item-card [list]="list"/>
     } @empty {

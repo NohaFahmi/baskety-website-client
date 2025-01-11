@@ -1,0 +1,29 @@
+<p-table [columns]="columns()" [value]="itemsList() ?? []">
+  <ng-template pTemplate="header" let-columns="columns">
+    <tr>
+      <th class="bg-white-alpha-40">Item Name</th>
+      <th class="bg-white-alpha-40">Item Image</th>
+      <th class="bg-white-alpha-40">Category</th>
+      <th class="bg-white-alpha-40">Item Price</th>
+      <th class="bg-white-alpha-40">Item Qty Unit</th>
+      <th class="bg-white-alpha-40">Created Date</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-columns="columns">
+    <tr class="mb-3">
+      @for(col of columns; track col.name) {
+        <td class="p-1">
+          @if(col.name === 'Created Time') {
+            {{ item[col.value] | date:"dd MMM yyyy"}}
+          } @else if (col.name === 'Item Image') {
+            <img [src]="item[col.value]" [alt]="item[col.name]" class="h-2rem"/>
+          }
+          @else {
+            {{ item[col.value]}}
+          }
+        </td>
+
+      }
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,45 @@
+<div class="add-edit-items p-4">
+  <h2 class="mb-4">Add bulk items</h2>
+  <form class="add-edit-items__form bg-white border-round p-4 w-full flex flex-column gap-6" [formGroup]="itemsForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-row gap-2 align-items-center">
+      <p class="m-0 font-semibold text-md">Items Category</p>
+      <p-dropdown
+        [options]="categoriesList() ?? []"
+        optionLabel="name"
+        formControlName="categoryId"
+        optionValue="id"
+        placeholder="Select a Category" />
+    </div>
+
+    <div class="add-edit-items_form-info-rows flex flex-column gap-4 h-full" formArrayName="items">
+      @for(item of items.controls; track item; let i = $index) {
+        <div class="add-edit-items_form-info-row-item flex gap-2 flex-wrap align-items-center" [formGroupName]="i">
+          <p class="m-0 font-semibold text-md">Item {{i+1}}</p>
+          <input type="text" pInputText  placeholder="Item Name" class="form-input w-12rem" formControlName="name"/>
+          <input type="number" pInputText  placeholder="Item Price"  class="form-input w-12rem" formControlName="price"/>
+          <input type="text" pInputText  placeholder="Item Quantity Unit"  class="form-input w-12rem" formControlName="qtyUnit"/>
+          <p-fileUpload
+            mode="basic"
+            styleClass="w-fit p-2"
+            chooseIcon="pi pi-upload"
+            uploadIcon="pi pi-file"
+            uploadLabel=""
+            name="files[]"
+            accept="image/*"
+            (onSelect)="onFileSelected($event, i)"
+            [maxFileSize]="100000"
+          />
+          <span class="ml-auto">
+            <p-button icon="pi pi-times" severity="danger" styleClass="p-2 w-fit" (click)="onRemoveItemRow(i)"/>
+          </span>
+        </div>
+      }
+      <p-button [text]="true" [raised]="true" icon="pi pi-plus" styleClass="shadow-none w-full bg-green-50" (click)="addNewItemRow()"/>
+    </div>
+    <div class="flex gap-3 justify-content-end w-full mt-8">
+      <p-button label="Cancel" [text]="true" severity="danger"
+                [link]="true" (click)="onCancelForm()"></p-button>
+      <p-button label="Save Items" type="submit"></p-button>
+    </div>
+  </form>
+</div>

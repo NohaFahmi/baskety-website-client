@@ -12,12 +12,12 @@
             <span>Home</span>
           </a>
         </li>
-        <li [class.active]="activeRoute().includes('stats')">
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'stats'">
-            <i class="pi pi-chart-pie"></i>
-            <span>stats</span>
-          </a>
-        </li>
+<!--        <li [class.active]="activeRoute().includes('stats')">-->
+<!--          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'stats'">-->
+<!--            <i class="pi pi-chart-pie"></i>-->
+<!--            <span>stats</span>-->
+<!--          </a>-->
+<!--        </li>-->
         <li [class.active]="activeRoute().includes('history')" >
           <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline" [routerLink]="'history'">
             <i class="pi pi-history"></i>
@@ -25,7 +25,7 @@
           </a>
         </li>
         <li [class.active]="activeRoute().includes('admin')">
-          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline"  [routerLink]="'stats'">
+          <a class="p-link flex flex-column gap-2 align-items-center justify-content-center text-sm no-underline"  [routerLink]="'admin'">
             <i class="pi pi-wrench"></i>
             <span>Admin</span>
           </a>

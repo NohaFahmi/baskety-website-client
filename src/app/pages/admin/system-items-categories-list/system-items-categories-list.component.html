@@ -1,0 +1,15 @@
+<div class="items-categories-list p-4">
+  <p-tabMenu [model]="items()" styleClass="bg-transparent" [activeItem]="items()[activeTabIndex()]"/>
+  <div class="py-3">
+    @if (activeTabIndex() === 0) {
+      <div class="flex flex-column align-items-end mb-4">
+        <p-button  icon="pi pi-plus" label="Add new item"
+                   styleClass="text-sm" (click)="navigateToAddItems()"/>
+      </div>
+      <app-items-list-table/>
+
+    } @else if (activeTabIndex() === 1) {
+      <app-categories-list-table/>
+    }
+  </div>
+</div>

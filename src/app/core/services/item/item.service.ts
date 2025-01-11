@@ -1,6 +1,6 @@
 import {Injectable, signal, Signal} from '@angular/core';
 import {HttpService} from "../http/http.service";
-import {lastValueFrom} from "rxjs";
+import {firstValueFrom, lastValueFrom} from "rxjs";
 import {IItem} from "../../../shared/interfaces/item.interface";
 import {sign} from "chart.js/helpers";
 
@@ -25,6 +25,12 @@ export class ItemService {
     return lastValueFrom(this.httpService.post(`item`, item));
   }
 
+  addManyItems(categoryId: string, items: IItem[]): Promise<IItem[]> {
+    const formData = new FormData();
+    formData.append("categoryId", categoryId);
+    formData.append("items", JSON.stringify(items));
+    return firstValueFrom(this.httpService.post('item/bulk', formData))
+  }
   updateItem(item: IItem): Promise<IItem> {
     return lastValueFrom(this.httpService.put(`item/`, item));
   }
