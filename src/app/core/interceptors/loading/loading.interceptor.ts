@@ -2,7 +2,6 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import {inject} from "@angular/core";
 import {LoadingService} from "../../../shared/services/loading/loading.service";
 import {finalize} from "rxjs";
-import {load} from "@angular-devkit/build-angular/src/utils/server-rendering/esm-in-memory-loader/loader-hooks";
 
 let totalRequests = 0;
 

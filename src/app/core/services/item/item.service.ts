@@ -18,23 +18,26 @@ export class ItemService {
   }
 
   getItemById(itemId: string): Promise<IItem> {
-    return lastValueFrom(this.httpService.get(`item/${itemId}`))
+    return lastValueFrom(this.httpService.get(`items/${itemId}`))
   }
 
   createItem(item: IItem): Promise<IItem> {
-    return lastValueFrom(this.httpService.post(`item`, item));
+    return lastValueFrom(this.httpService.post(`items`, item));
   }
 
   addManyItems(categoryId: string, items: IItem[]): Promise<IItem[]> {
-    const formData = new FormData();
-    formData.append("categoryId", categoryId);
-    formData.append("items", JSON.stringify(items));
-    return firstValueFrom(this.httpService.post('item/bulk', formData))
+    // const formData = new FormData();
+    // formData.append("categoryId", categoryId);
+    // formData.append("items", JSON.stringify(items));
+    return firstValueFrom(this.httpService.post('items/bulk', {
+      categoryId,
+      items
+    }))
   }
   updateItem(item: IItem): Promise<IItem> {
-    return lastValueFrom(this.httpService.put(`item/`, item));
+    return lastValueFrom(this.httpService.put(`items/`, item));
   }
   deleteItem(itemId: string): Promise<IItem> {
-    return lastValueFrom(this.httpService.delete(`item/${itemId}`));
+    return lastValueFrom(this.httpService.delete(`items/${itemId}`));
   }
 }

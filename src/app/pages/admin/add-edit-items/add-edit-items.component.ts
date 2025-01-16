@@ -40,11 +40,12 @@ export class AddEditItemsComponent {
       name: new FormControl("", [Validators.required]),
       price: new FormControl("", [Validators.required]),
       qtyUnit: new FormControl("", [Validators.required]),
-      imageFile: new FormControl("", [Validators.required]),
+      imgUrl: new FormControl("", [Validators.required]),
     });
   }
 
   get items(): FormArray {
+    console.log(this.itemsForm.get('items'));
     return this.itemsForm.get('items') as FormArray;
   }
 
@@ -52,20 +53,20 @@ export class AddEditItemsComponent {
     this.items.push(this.createItemGroup());
   }
 
-  async onFileSelected(event: FileSelectEvent, index: number) {
-    const file = event.currentFiles[0];
-    if (file) {
-      const blobURL = await this.blobUrlToFile(URL.createObjectURL(file), file.name);
-      this.items.at(index).get('imageFile')?.setValue(blobURL);
-    }
-  }
-  async  blobUrlToFile(blobUrl: string, fileName: string): Promise<File> {
-    const response = await fetch(blobUrl);
-    const blob = await response.blob();
-    return new File([blob], fileName, { type: blob.type });
-  }
+  // async onFileSelected(event: FileSelectEvent, index: number) {
+  //   const file = event.currentFiles[0];
+  //   if (file) {
+  //     const blobURL = await this.blobUrlToFile(URL.createObjectURL(file), file.name);
+  //     this.items.at(index).get('imageFile')?.setValue(blobURL);
+  //   }
+  // }
+  // async  blobUrlToFile(blobUrl: string, fileName: string): Promise<File> {
+  //   const response = await fetch(blobUrl);
+  //   const blob = await response.blob();
+  //   return new File([blob], fileName, { type: blob.type });
+  // }
   onSubmit(): void {
-    console.log(this.itemsForm)
+    this.itemsForm.markAllAsTouched();
     if (this.itemsForm.valid) {
       const payload = {
         categoryId: this.itemsForm.value['categoryId'] as string,
@@ -73,12 +74,12 @@ export class AddEditItemsComponent {
 
       }
       this.itemService.addManyItems(payload.categoryId, payload.items).then((res) => {
-        console.log(res);
+        this.router.navigate(['app/admin']);
       })
     }
   }
   onCancelForm() {
-    this.router.navigate(['/app/admin'])
+    this.router.navigate(['/app/admin']);
   }
 
   onRemoveItemRow(i: number) {
@@ -86,4 +87,6 @@ export class AddEditItemsComponent {
       this.items.removeAt(i);
     }
   }
+
+  protected readonly JSON = JSON;
 }

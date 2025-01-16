@@ -15,23 +15,42 @@
       @for(item of items.controls; track item; let i = $index) {
         <div class="add-edit-items_form-info-row-item flex gap-2 flex-wrap align-items-center" [formGroupName]="i">
           <p class="m-0 font-semibold text-md">Item {{i+1}}</p>
-          <input type="text" pInputText  placeholder="Item Name" class="form-input w-12rem" formControlName="name"/>
-          <input type="number" pInputText  placeholder="Item Price"  class="form-input w-12rem" formControlName="price"/>
-          <input type="text" pInputText  placeholder="Item Quantity Unit"  class="form-input w-12rem" formControlName="qtyUnit"/>
-          <p-fileUpload
-            mode="basic"
-            styleClass="w-fit p-2"
-            chooseIcon="pi pi-upload"
-            uploadIcon="pi pi-file"
-            uploadLabel=""
-            name="files[]"
-            accept="image/*"
-            (onSelect)="onFileSelected($event, i)"
-            [maxFileSize]="100000"
-          />
-          <span class="ml-auto">
+          <div class="relative">
+            <input type="text" pInputText placeholder="Item Name"
+                   class="form-input w-12rem {{item.get('name')?.invalid && item.get('name')?.touched ? 'ng-dirty ng-invalid' : ''}}" formControlName="name"/>
+            @if(item.get('name')?.invalid && item.get('name')?.touched) {
+              <small class="p-error absolute left-0">Field is required</small>
+            }
+          </div>
+          <div class="relative">
+            <input type="number" pInputText  placeholder="Item Price"
+                   class="form-input w-12rem {{item.get('price')?.invalid && item.get('price')?.touched ? 'ng-dirty ng-invalid' : ''}}"
+                   formControlName="price"/>
+            @if(item.get('price')?.invalid && item.get('price')?.touched) {
+              <small class="p-error absolute left-0">Field is required</small>
+            }
+          </div>
+          <div class="relative">
+            <input type="text" pInputText  placeholder="Item Quantity Unit"
+                   class="form-input w-12rem {{item.get('qtyUnit')?.invalid && item.get('qtyUnit')?.touched ? 'ng-dirty ng-invalid' : ''}}"
+                   formControlName="qtyUnit"/>
+            @if(item.get('qtyUnit')?.invalid && item.get('qtyUnit')?.touched) {
+              <small class="p-error absolute left-0">Field is required</small>
+            }
+          </div>
+          <div class="relative">
+            <input type="text" pInputText  placeholder="Item Image URL"
+                   class="form-input w-12rem {{item.get('imgUrl')?.invalid && item.get('imgUrl')?.touched ? 'ng-dirty ng-invalid' : ''}}"
+                   formControlName="imgUrl"/>
+            @if(item.get('imgUrl')?.invalid && item.get('imgUrl')?.touched) {
+              <small class="p-error absolute left-0">Field is required</small>
+            }
+          </div>
+         @if(items.controls.length > 1) {
+           <span class="ml-auto">
             <p-button icon="pi pi-times" severity="danger" styleClass="p-2 w-fit" (click)="onRemoveItemRow(i)"/>
           </span>
+         }
         </div>
       }
       <p-button [text]="true" [raised]="true" icon="pi pi-plus" styleClass="shadow-none w-full bg-green-50" (click)="addNewItemRow()"/>
