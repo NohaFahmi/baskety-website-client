@@ -53,10 +53,7 @@ export class ShoppingListService {
   }
 
   updateShoppingListName(listId: number, name: string) {
-      this.listService.updateList(listId, {
-        name,
-        items: this.setListItems()
-      });
+      return this.listService.updateListName(listId, name);
   }
 
   private setListItems() {

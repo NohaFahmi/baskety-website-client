@@ -69,6 +69,18 @@ export class ListService {
     });
   }
 
+  updateListName(listId: number, listName: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firstValueFrom(this.httpService.put(`lists/name/update/${listId}`, {
+        name: listName
+      })).then((list) => {
+       console.log('list', list);
+        resolve({list})
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  }
   deleteList(listId: number): Promise<IList> {
       return firstValueFrom(this.httpService.delete(`lists/${listId}`));
   }

@@ -8,9 +8,9 @@
            } @else {
              <h3 class="text-center shopping-list__name"> {{ list.name }}</h3>
            }
-<!--           <p-button [icon]="editMode() ? 'pi pi-save' : 'pi pi-pencil'"-->
-<!--                     styleClass="h-fil w-fit p-0 border-none bg-transparent"-->
-<!--                     [text]="true" severity="secondary" (click)="onEditList()"/>-->
+           <p-button [icon]="editMode() ? 'pi pi-save' : 'pi pi-pencil'"
+                     styleClass="h-fil w-fit p-0 border-none bg-transparent"
+                     [text]="true" severity="secondary" (click)="onEditList()"/>
          }
        </div>
        <div class="shopping-list__items flex flex-column py-2 px-1 gap-3 overflow-y-auto">

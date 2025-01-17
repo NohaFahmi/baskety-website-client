@@ -55,10 +55,10 @@ export class ShoppingListComponent {
   }
 
   onEditList() {
-    // this.editMode.set(!this.editMode());
-    // if(this.currentOpenShoppingList() && !this.editMode()) {
-    //   this.shoppingListService.updateShoppingListName(this.currentOpenShoppingList()?.id ?? 0,this.currentOpenShoppingList()?.name ?? "")
-    // }
+    this.editMode.set(!this.editMode());
+    if(this.currentOpenShoppingList() && !this.editMode()) {
+      this.shoppingListService.updateShoppingListName(this.currentOpenShoppingList()?.id ?? 0,this.currentOpenShoppingList()?.name ?? "")
+    }
   }
 
   updateList(item: IListItem) {
