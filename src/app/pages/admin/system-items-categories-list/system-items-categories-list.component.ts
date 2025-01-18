@@ -7,6 +7,9 @@ import {
 } from "../../../shared/components/categories-list-table/categories-list-table.component";
 import {ButtonModule} from "primeng/button";
 import {Router} from "@angular/router";
+import {DialogsService, DynamicDialogService} from "../../../shared/services/dialogs/dialogs.service";
+import {AddCategoryFormComponent} from "../../../shared/components/forms/add-category-form/add-category-form.component";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-system-items-categories-list',
@@ -17,6 +20,7 @@ import {Router} from "@angular/router";
     CategoriesListTableComponent,
     ButtonModule
   ],
+  providers: [DialogsService, DynamicDialogService],
   templateUrl: './system-items-categories-list.component.html',
   styleUrl: './system-items-categories-list.component.scss'
 })

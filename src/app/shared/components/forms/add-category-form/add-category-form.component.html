@@ -1,0 +1,41 @@
+<div class="edit-item-form flex flex-column gap-4">
+  <div class="edit-item-form__header flex align-items-center justify-content-between">
+    <h3 class="m-0 text-center">
+      {{ title() }}
+    </h3>
+    <p-button styleClass="p-2 w-fit bg-transparent border-none shadow-none" icon="pi pi-times"
+              (onClick)="onCancel()"
+              [raised]="true"
+              [text]="true" />
+  </div>
+
+  <form class="edit-item-form__form flex flex-column gap-4"
+        [formGroup]="addNewCategory"
+        (ngSubmit)="onSubmit()">
+
+      <div class="relative flex flex-column gap-2 w-full">
+        <label>Category Name</label>
+        <input type="text" pInputText placeholder="Category Name"
+               class="form-input w-full {{addNewCategory.get('name')?.invalid && addNewCategory.get('name')?.touched ? 'ng-dirty ng-invalid' : ''}}" formControlName="name"/>
+        @if(addNewCategory.get('name')?.invalid && addNewCategory.get('name')?.touched) {
+          <small class="p-error absolute left-0">Field is required</small>
+        }
+      </div>
+
+      <div class="relative flex flex-column gap-2 w-full">
+        <label>Category Image URL</label>
+        <input type="text" pInputText  placeholder="Category Image URL"
+               class="form-input w-full {{addNewCategory.get('image')?.invalid && addNewCategory.get('image')?.touched ? 'ng-dirty ng-invalid' : ''}}"
+               formControlName="image"/>
+        @if(addNewCategory.get('image')?.invalid && addNewCategory.get('image')?.touched) {
+          <small class="p-error absolute left-0">Field is required</small>
+        }
+      </div>
+
+    <div class="flex gap-3 justify-content-end w-full mt-4">
+      <p-button label="Cancel" [text]="true" severity="danger"
+                [link]="true" (click)="onCancel()"></p-button>
+      <p-button label="Save Category" type="submit"></p-button>
+    </div>
+  </form>
+</div>

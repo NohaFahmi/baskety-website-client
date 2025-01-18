@@ -1,29 +1,38 @@
-<p-table [columns]="columns()" [value]="itemsList() ?? []">
-  <ng-template pTemplate="header" let-columns="columns">
-    <tr>
-      <th class="bg-white-alpha-40">Item Name</th>
-      <th class="bg-white-alpha-40">Item Image</th>
-      <th class="bg-white-alpha-40">Category</th>
-      <th class="bg-white-alpha-40">Item Price</th>
-      <th class="bg-white-alpha-40">Item Qty Unit</th>
-      <th class="bg-white-alpha-40">Created Date</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item let-columns="columns">
-    <tr class="mb-3">
-      @for(col of columns; track col.name) {
+@if(itemsList()(); as itemsList) {
+  <p-table [columns]="columns()" [value]="itemsList">
+    <ng-template pTemplate="header" let-columns="columns">
+      <tr>
+        <th class="bg-white-alpha-40 p-1">Item Name</th>
+        <th class="bg-white-alpha-40 p-1">Item Image</th>
+        <th class="bg-white-alpha-40 p-1">Category</th>
+        <th class="bg-white-alpha-40 p-1">Item Price</th>
+        <th class="bg-white-alpha-40 p-1">Item Qty Unit</th>
+        <th class="bg-white-alpha-40 p-1">Created Date</th>
+        <th class="bg-white-alpha-40 text-center p-1">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-columns="columns">
+      <tr class="mb-3">
+        @for(col of columns; track col.name) {
+          <td class="p-1">
+            @if(col.name === 'Created Time') {
+              {{ item[col.value] | date:"dd MMM yyyy"}}
+            } @else if (col.name === 'Item Image') {
+              <img [src]="item[col.value]" [alt]="item[col.name]" class="h-2rem"/>
+            }
+            @else {
+              {{ item[col.value]}}
+            }
+          </td>
+        }
         <td class="p-1">
-          @if(col.name === 'Created Time') {
-            {{ item[col.value] | date:"dd MMM yyyy"}}
-          } @else if (col.name === 'Item Image') {
-            <img [src]="item[col.value]" [alt]="item[col.name]" class="h-2rem"/>
-          }
-          @else {
-            {{ item[col.value]}}
-          }
+        <span class="flex gap-3 justify-content-center">
+          <p-button styleClass="w-fit p-1 bg-transparent border-none text-color" icon="pi pi-pencil" (onClick)="onEditItem(item)"/>
+          <p-button styleClass="w-fit p-1 bg-transparent border-none text-color" icon="pi pi-trash" (onClick)="onDeleteItem(item)"/>
+        </span>
         </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-      }
-    </tr>
-  </ng-template>
-</p-table>
+}

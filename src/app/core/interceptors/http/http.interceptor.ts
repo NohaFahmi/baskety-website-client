@@ -28,9 +28,10 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             }
           });
           return next(authReq).pipe(
-            catchError((error) => {
-              if (error.status !== 200) {
-                messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message });
+            catchError(({error}) => {
+              console.log(error);
+              if (error.statusCode !== 200) {
+                messageService.add({ severity: 'error', summary: 'Error', detail: error.error });
               }
               return throwError(() => new Error(error));
             })

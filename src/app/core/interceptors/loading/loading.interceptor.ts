@@ -8,11 +8,11 @@ let totalRequests = 0;
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService);
   totalRequests++;
-  loadingService.setLoading(true);
+  // loadingService.setLoading(true);
   return next(req).pipe(finalize(() => {
     totalRequests--;
     if (totalRequests === 0) {
-      loadingService.setLoading(false);
+      // loadingService.setLoading(false);
     }
   }
   ));

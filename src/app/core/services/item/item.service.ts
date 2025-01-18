@@ -17,7 +17,7 @@ export class ItemService {
     return lastValueFrom(this.httpService.get(`items/byCategory/${id}`))
   }
 
-  getItemById(itemId: string): Promise<IItem> {
+  getItemById(itemId: number): Promise<IItem> {
     return lastValueFrom(this.httpService.get(`items/${itemId}`))
   }
 
@@ -34,10 +34,10 @@ export class ItemService {
       items
     }))
   }
-  updateItem(item: IItem): Promise<IItem> {
-    return lastValueFrom(this.httpService.put(`items/`, item));
+  updateItem(itemId: number, item: IItem): Promise<IItem> {
+    return lastValueFrom(this.httpService.put(`items/${itemId}`, item));
   }
-  deleteItem(itemId: string): Promise<IItem> {
+  deleteItem(itemId: number): Promise<IItem> {
     return lastValueFrom(this.httpService.delete(`items/${itemId}`));
   }
 }

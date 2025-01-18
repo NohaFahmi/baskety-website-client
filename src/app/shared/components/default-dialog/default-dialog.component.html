@@ -1,0 +1,14 @@
+<div
+  class="w-full flex flex-column justify-content-start align-items-center default-dialog">
+  <div
+    class="default-dialog_close flex justify-content-between align-items-baseline w-full">
+    <h3 class="w-full mt-0 mb-3 font-medium text-base">
+      {{ title() }}
+    </h3>
+    <p-button icon="pi pi-times" [raised]="true" [text]="true" />
+  </div>
+  <div class="w-full flex align-items-center gap-2 font-normal text-sm">
+
+    <p class="m-0" [innerHTML]="content()"></p>
+  </div>
+</div>

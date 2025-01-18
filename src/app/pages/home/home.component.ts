@@ -67,7 +67,7 @@ export class HomeComponent {
     effect(() => {
       const categories = this.categoriesList();
       untracked(() => {
-        if (categories && categories.length > 0) {
+        if (categories && categories.length > 0 && categories[0].id) {
           this.selectedCategoryId.set(categories[0]?.id);
           this.loadItemsListInCategory(this.selectedCategoryId() as number);
         }
