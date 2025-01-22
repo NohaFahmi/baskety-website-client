@@ -1,6 +1,6 @@
 @if (list) {
-  <div class="history-list-item-card flex justify-content-between align-items-center bg-white-alpha-50
-   border-round px-4 py-3 shadow-1">
+  <div class="history-list-item-card flex justify-content-between align-items-center bg-white-alpha-50 cursor-pointer
+   border-round px-4 py-3 shadow-1" (click)="onNavigationToListDetails(list.id)">
     <div class="flex gap-2">
       <span class="font-semibold text-gray-700 min-w-5rm w-7rem block">{{list.name}}</span>
       <p-tag [severity]="list.status === ShoppingListStatus.COMPLETED ? 'success' : 'danger'"
@@ -8,9 +8,7 @@
     </div>
     <div class="flex gap-3">
       <span class="text-md text-gray-500">{{list.updatedAt | date:"dd MMM yyyy"}}</span>
-      <a class="p-link" (click)="onNavigationToListDetails(list.id)">
         <i class="pi pi-angle-right"></i>
-      </a>
     </div>
   </div>
 

@@ -25,6 +25,6 @@ export class HistoryListItemCardComponent {
   private router = inject(Router);
 
   onNavigationToListDetails(id: number) {
-    // this.router.navigate([`/lists/${id}`]);
+    this.router.navigate([`app/lists/${id}`]);
   }
 }

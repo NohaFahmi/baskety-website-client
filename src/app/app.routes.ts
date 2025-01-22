@@ -34,8 +34,8 @@ export const routes: Routes = [
       //   loadComponent: () => import('./pages/stats/stats.component').then(c => c.StatsComponent),
       // },
       {
-        path: 'history',
-        loadComponent: () => import('./pages/history/history.component').then(c => c.HistoryComponent),
+        path: 'lists',
+       loadChildren: () => import("./pages/history/history.routes").then(m => m.HistoryRoutes),
       },
       {
         path: 'admin',
