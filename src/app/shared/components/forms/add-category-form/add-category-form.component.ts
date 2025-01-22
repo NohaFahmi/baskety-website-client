@@ -1,14 +1,10 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DialogService, DynamicDialogComponent, DynamicDialogRef} from "primeng/dynamicdialog";
-import {ItemService} from "../../../../core/services/item/item.service";
 import {CategoryService} from "../../../../core/services/category/category.service";
-import {toSignal} from "@angular/core/rxjs-interop";
-import {from} from "rxjs";
-import {IItem} from "../../../interfaces/item.interface";
 import {ICategory} from "../../../interfaces/category.interface";
 
 @Component({
@@ -23,7 +19,7 @@ import {ICategory} from "../../../interfaces/category.interface";
   templateUrl: './add-category-form.component.html',
   styleUrl: './add-category-form.component.scss'
 })
-export class AddCategoryFormComponent {
+export class AddCategoryFormComponent implements OnInit{
   protected readonly Object = Object;
   private ref: DynamicDialogRef = inject(DynamicDialogRef);
   private dialogService: DialogService = inject(DialogService);
@@ -31,6 +27,7 @@ export class AddCategoryFormComponent {
   private categoryService  = inject(CategoryService);
   private formBuilder = inject(FormBuilder);
   title = signal<string>("");
+  category = signal<ICategory | null>(null);
   addNewCategory = this.formBuilder.group({
     name: new FormControl("", [Validators.required]),
     image: new FormControl("", [Validators.required]),
@@ -42,6 +39,13 @@ export class AddCategoryFormComponent {
   ngOnInit(): void {
     if (this.instance && this.instance?.data) {
       this.title.set(this.instance?.data.title);
+      this.category.set(this.instance?.data.category);
+      if(this.category()?.id) {
+        this.addNewCategory.patchValue({
+          name: this.category()?.name ?? "",
+          image: this.category()?.image ?? "",
+        })
+      }
     }
   }
   onCancel() {
@@ -52,9 +56,15 @@ export class AddCategoryFormComponent {
   onSubmit() {
     this.addNewCategory.markAllAsTouched();
     if (this.addNewCategory.valid) {
-      this.categoryService.createCategory(this.addNewCategory.value as ICategory).then(() => {
-        this.closeDialog(true);
-      })
+      if(this.category()?.id) {
+        this.categoryService.updateCategory(this.addNewCategory.value as ICategory).then(() => {
+          this.closeDialog(true);
+        })
+      } else {
+        this.categoryService.createCategory(this.addNewCategory.value as ICategory).then(() => {
+          this.closeDialog(true);
+        })
+      }
     }
   }
 

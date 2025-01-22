@@ -1,6 +1,6 @@
 @if (category) {
   <div class="category-card flex flex-column gap-3 w-fit border-round cursor-pointer"
-       (click)="onSelectCategoryItem(category.id)">
+       (click)="onSelectCategoryItem(category)">
     <img [ngSrc]="category.image"
          priority [alt]="category.name"
          width="100" height="100" class="border-round"/>

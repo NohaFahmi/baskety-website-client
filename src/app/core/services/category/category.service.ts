@@ -1,8 +1,7 @@
-import {inject, Injectable, signal, Signal} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpService} from "../http/http.service";
 import {BehaviorSubject, firstValueFrom, lastValueFrom} from "rxjs";
 import {ICategory} from "../../../shared/interfaces/category.interface";
-import {IItem} from "../../../shared/interfaces/item.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +31,9 @@ export class CategoryService {
     return firstValueFrom(this.httpService.post('categories', category));
   }
 
+  updateCategory(category: ICategory): Promise<ICategory> {
+    return firstValueFrom(this.httpService.put(`categories/${category.id}`, category));
+  }
   deleteCategory(id: number): Promise<void> {
     return firstValueFrom(this.httpService.delete(`categories/${id}`));
   }

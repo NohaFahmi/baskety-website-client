@@ -8,7 +8,6 @@ export class LoadingService {
   constructor() { }
   setLoading(value: boolean): void {
     this.isLoading.set(value);
-    console.log('here', this.isLoading());
   }
   getLoading(): boolean {
     return this.isLoading();

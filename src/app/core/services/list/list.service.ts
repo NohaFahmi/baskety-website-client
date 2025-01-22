@@ -74,7 +74,6 @@ export class ListService {
       firstValueFrom(this.httpService.put(`lists/name/update/${listId}`, {
         name: listName
       })).then((list) => {
-       console.log('list', list);
         resolve({list})
       }).catch((error) => {
         reject(error)

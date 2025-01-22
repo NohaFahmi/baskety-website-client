@@ -27,7 +27,6 @@ export class StatsComponent {
   }
 
   setChartsConfigs(stats: IStats): void {
-    console.log(stats.topCategories.map((category) => category.category? category.category.name : 'test'))
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color-green');
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -141,8 +140,6 @@ export class StatsComponent {
     this.statsService.getStats().then((stats) => {
       this.statsInfo = stats;
       this.setChartsConfigs(this.statsInfo);
-    }).catch((error) => {
-      console.log('ERROR', error);
     })
   }
 

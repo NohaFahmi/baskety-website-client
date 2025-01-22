@@ -1,8 +1,7 @@
-import {HttpErrorResponse, HttpHandler, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
-import {AuthService} from "../../services/auth/auth.service";
+import { HttpInterceptorFn} from '@angular/common/http';
 import {inject} from "@angular/core";
 import {Auth} from "@angular/fire/auth";
-import {catchError, from, Observable, switchMap, throwError} from "rxjs";
+import {catchError, from, switchMap, throwError} from "rxjs";
 import {MessageService} from "primeng/api";
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
@@ -17,7 +16,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
       })
     )
   } else {
-    const authService = inject(AuthService);
     const auth = inject(Auth);
     if (auth.currentUser) {
       return from(auth.currentUser.getIdToken(true)).pipe(
@@ -29,7 +27,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
           });
           return next(authReq).pipe(
             catchError(({error}) => {
-              console.log(error);
               if (error.statusCode !== 200) {
                 messageService.add({ severity: 'error', summary: 'Error', detail: error.error });
               }

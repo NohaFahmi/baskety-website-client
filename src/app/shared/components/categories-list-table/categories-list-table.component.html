@@ -1,29 +1,38 @@
 <div class="flex flex-column align-items-end mb-4">
-  <p-button  icon="pi pi-plus" label="Add new category"
-             styleClass="text-sm" (onClick)="addNewCategory()"/>
+  <p-button icon="pi pi-plus" label="Add new category"
+            styleClass="text-sm" (onClick)="addNewCategory()"/>
 </div>
 @if (categoriesList()(); as categories) {
   <p-table [columns]="columns()" [value]="categories" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header" let-columns="columns">
       <tr>
         <th>Category Name</th>
+        <th>Category Image</th>
         <th>Created Date</th>
+        <th class="text-center">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item let-columns="columns">
       <tr>
-        @for(col of columns; track col.name) {
+        @for (col of columns; track col.name) {
           <td>
-
-            @if(col.name === 'Created Time') {
-              {{ item[col.value] | date:"dd MMM yyyy"}}
-            } @else {
-              {{ item[col.value]}}
-            }
+          @if (col.name === 'Created Time') {
+            {{ item[col.value] | date:"dd MMM yyyy" }}
+          } @else if (col.name === 'Category Image') {
+            <img [src]="item[col.value]" [alt]="item[col.name]" class="h-2rem"/>
+          }@else {
+            {{ item[col.value] }}
+          }
           </td>
-
         }
+        <td class="p-1">
+        <span class="flex gap-3 justify-content-center">
+          <p-button styleClass="w-fit p-1 bg-transparent border-none text-color" icon="pi pi-pencil" (onClick)="onEditCategory(item)"/>
+          <p-button styleClass="w-fit p-1 bg-transparent border-none text-color" icon="pi pi-trash" (onClick)="onDeleteCategory(item)"/>
+        </span>
+        </td>
       </tr>
+
     </ng-template>
   </p-table>
 }

@@ -14,7 +14,8 @@ import {ICategory} from "../../interfaces/category.interface";
 export class HomeCategoryCardComponent {
   @Output() onCategorySelected = new EventEmitter<number>();
   @Input() category?: ICategory;
-  onSelectCategoryItem(id: number) {
-    this.onCategorySelected.emit(id);
+
+  onSelectCategoryItem(category: ICategory) {
+    this.onCategorySelected.emit(category.id);
   }
 }

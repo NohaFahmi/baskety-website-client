@@ -3,13 +3,12 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
-import {FileSelectEvent, FileUploadModule} from "primeng/fileupload";
+import {FileUploadModule} from "primeng/fileupload";
 import {Router} from "@angular/router";
 import {CategoryService} from "../../../core/services/category/category.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {from} from "rxjs";
 import {ItemService} from "../../../core/services/item/item.service";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-add-edit-items',
@@ -45,7 +44,6 @@ export class AddEditItemsComponent {
   }
 
   get items(): FormArray {
-    console.log(this.itemsForm.get('items'));
     return this.itemsForm.get('items') as FormArray;
   }
 
@@ -73,7 +71,7 @@ export class AddEditItemsComponent {
         items: this.itemsForm.controls['items'].value
 
       }
-      this.itemService.addManyItems(payload.categoryId, payload.items).then((res) => {
+      this.itemService.addManyItems(payload.categoryId, payload.items).then(() => {
         this.router.navigate(['app/admin']);
       })
     }
